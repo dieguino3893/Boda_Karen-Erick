@@ -1,0 +1,178 @@
+@import url('https://fonts.cdnfonts.com/css/miama');
+@import url('https://fonts.googleapis.com/css2?family=Alkatra:wght@700&family=Cairo:wght@600;1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alkatra:wght@700&family=Cairo:wght@600;1000&family=Montserrat:ital,wght@0,100;1,100&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+body{
+    background-color: rgb(230,230,230);
+}
+.main-backgroundcolor{
+    background-color: #B7AA92;
+}
+.main-fontcolor{
+    color: #B7AA92;
+}
+.mainImage {
+    width: 100%;
+}
+.mainText{
+
+    font-family: 'Miama', sans-serif;
+    font-size: 4rem;
+}
+.mainImage img {
+    width: 100%;
+}
+
+.box {
+    padding: 10px 25px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-bottom: 25px;
+}
+h1{
+    font-family: 'Alkatra', cursive;
+    font-family: 'Cairo', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    padding: 10px;
+}
+h2 {
+
+    font-size: 1.5rem;
+    text-align: center;
+    padding: 0.4rem 0.5rem;
+}
+
+p {
+    font-family: 'Alkatra', cursive;
+    font-family: 'Cairo', sans-serif;
+    display: flex;
+    text-align: center;
+    padding: 0.4rem 0.5rem;
+}
+.details{
+    background-image: 'img/fondo.jpg';
+}
+.box-date {
+    display: flex;
+    flex-direction: row;
+}
+
+.date {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    margin: 5px;
+}
+.box img{
+    width: 100px;
+    margin-bottom: 10px;
+}
+.date-celebration{
+    display: flex;
+    flex-direction: row;
+    font-size: 2rem;
+}
+.date-celebration > div{
+width: 50%;
+}
+.box  span{
+    font-size: 0.5 rem;
+}
+.date-celebration > div:first-child{
+   border-right: 1px solid;
+}
+.hour{
+    display: flex;
+    align-items: center;
+}
+.hour span{
+    font-size: 1rem;
+}
+.ubication{
+    width: 100%;
+    max-width: 300px;
+    font-size: 1rem;
+    padding: 10px;
+}
+.collage{
+    padding: 15px;
+    margin-bottom: 15px;
+}
+.container-img{
+    width: 100%;
+    max-width: 1100px;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 250px;
+    grid-gap: 20px;
+}
+.container-img .box-img figure{
+    width: 100%;
+    height: 100%;
+}
+.container-img .box-img img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.container-img .box-img:nth-child(1){
+    grid-column-start: span 2;
+}
+.container-img .box-img:nth-child(4){
+    grid-row-start: span 2;
+}
+
+@media only screen and (min-width: 600px)  {
+
+    .details{
+        display: flex;
+        flex-direction: row;
+        align-items: start;
+        justify-content: center;
+        margin-bottom: 15px;
+    }
+}
+@media only screen and (min-width: 800px)  {
+    .mainImage{
+        height: 600px;
+    }
+    .mainImage img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+@media screen and (max-width:800px){
+  
+    .container-img{
+        width: 95%;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+        grid-template-rows: 200px;
+    }
+    .container-img .box-img:nth-child(1){
+        grid-column-start: span 1;
+    }
+}
+@media screen and (max-width:500px){
+    .container-img{
+        width: 90%;
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .container-img .box-img img{
+        height: 200px;
+    }
+}
