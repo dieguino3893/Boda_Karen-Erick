@@ -1,7 +1,179 @@
 @import url('https://fonts.cdnfonts.com/css/miama');
 @import url('https://fonts.googleapis.com/css2?family=Alkatra:wght@700&family=Cairo:wght@600;1000&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Alkatra:wght@700&family=Cairo:wght@600;1000&family=Montserrat:ital,wght@0,100;1,100&display=swap');
+h1, h2, p, img, .box, .container-img {
+    opacity: 0;
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+body {
+    font-family: 'Times New Roman', Times, serif; /* O la tipografía de tu elección */
+    background-color: #f7f3ed; /* Color de fondo claro */
+    margin: 0;
+    padding: 0;
+}
 
+.contenedor-principal {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    padding: 20px;
+}
+
+/* Estilos del itinerario */
+.itinerario {
+    background-image: url('fondo-hojas.png'); /* Ruta de tu imagen de fondo */
+    background-size: cover;
+    background-position: center;
+    width: 80%;
+    max-width: 900px;
+    padding: 40px 20px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.header-itinerario h1 {
+    font-family: 'Times New Roman', Times, serif; /* Usa una fuente elegante para el título */
+    font-size: 3em;
+    color: #a0885e; /* Color dorado */
+    margin-bottom: 5px;
+}
+
+.header-itinerario p {
+    font-size: 0.9em;
+    color: #555;
+    letter-spacing: 2px;
+}
+
+.linea-tiempo {
+    position: relative;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.linea-tiempo::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    width: 2px;
+    height: 100%;
+    background-color: #a0885e; /* Color de la línea */
+    transform: translateX(-50%);
+}
+
+.evento {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.icono-evento {
+    width: 60px;
+    height: 60px;
+    background-color: #a0885e;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.icono-evento img {
+    width: 30px;
+    height: 30px;
+}
+
+.detalle-evento {
+    position: absolute;
+    width: 40%;
+    text-align: right;
+    right: 55%; /* Alineación a la izquierda del icono */
+    color: #333;
+}
+
+.detalle-evento p:first-child {
+    font-weight: bold;
+}
+
+.detalle-evento p:last-child {
+    font-size: 0.8em;
+    color: #666;
+}
+
+/* Corrección completa del panel de navegación */
+.panel-navegacion {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: white;
+    border-radius: 50px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    z-index: 100;
+}
+
+.panel-navegacion ul {
+    list-style: none;
+    padding: 10px 5px; /* Restauramos el padding */
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.panel-navegacion li {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    position: relative; /* Agregamos para el centrado */
+    transition: background-color 0.3s ease; /* Transición suave */
+}
+
+.panel-navegacion li a {
+    display: flex; /* Cambiamos a flex para mejor centrado */
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+.panel-navegacion li img {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+    transition: filter 0.3s ease; /* Transición suave para el filtro */
+}
+
+/* Estado activo */
+.panel-navegacion .activo {
+    background-color: #a0885e;
+}
+
+/* Filtro para invertir colores cuando está activo */
+.panel-navegacion .activo img {
+    filter: brightness(0) saturate(100%) invert(1);
+}
+
+/* Hover effect opcional */
+.panel-navegacion li:hover {
+    background-color: rgba(160, 136, 94, 0.2);
+}
+
+.panel-navegacion .activo:hover {
+    background-color: #8c734d; /* Un poco más oscuro al hacer hover */
+}
 * {
     margin: 0;
     padding: 0;
@@ -103,7 +275,16 @@ width: 50%;
     max-width: 300px;
     font-size: 1rem;
     padding: 10px;
+    border: 1px solid #B7AA92; /* Un borde sutil que coincide con la paleta de colores */
+    border-radius: 20px; /* Bordes más redondeados para suavizarlo */
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}   
+.ubication:hover {
+    background-color: #B7AA92; /* Un efecto al pasar el mouse */
+    color: #fff; /* El texto se vuelve blanco al pasar el mouse */
 }
+
 .collage{
     padding: 15px;
     margin-bottom: 15px;
@@ -175,4 +356,140 @@ width: 50%;
     .container-img .box-img img{
         height: 200px;
     }
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Ajusta según tu diseño */
+  overflow: hidden;
+}
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute; /* Posiciona la imagen en el fondo */
+  top: 0;
+  left: 0;
+  z-index: 1; /* Asegura que la imagen esté detrás del texto */
+}
+
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif; /* Puedes cambiar la fuente a una similar a la de la imagen */
+}
+
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh; /* Ocupa el 100% de la altura de la ventana del navegador */
+  overflow: hidden;
+  display: flex; /* Usamos Flexbox para centrar el contenido */
+  flex-direction: column; /* Cambiado a columna para apilar el contador y los nombres */
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  text-align: center;
+}
+
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute; /* Posiciona la imagen en el fondo */
+  top: 0;
+  left: 0;
+  z-index: 1; /* Asegura que la imagen esté detrás del texto */
+}
+
+.overlay-content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.overlay-content {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.countdown-container {
+  display: flex;
+  gap: 15px; /* Espaciado entre los elementos del contador */
+  justify-content: center;
+  margin-bottom: 20px; /* Espacio entre el contador y los nombres */
+}
+
+.countdown-unit {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.countdown-unit span {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: normal;
+}
+
+.name-overlay {
+  font-size: 8vw;
+  font-weight: bold;
+  line-height: 1.1;
+  padding: 0 20px;
+}
+
+.name-overlay span {
+  display: block;
+}
+
+
+/* Formulario RSVP */
+#rsvp-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 90%;
+    max-width: 400px;
+    margin: auto;
+}
+#rsvp-form input, 
+#rsvp-form select, 
+#rsvp-form button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+#rsvp-form button {
+    background-color: #a0885e;
+    color: white;
+    cursor: pointer;
+    border: none;
+}
+#rsvp-form button:hover {
+    background-color: #8c734d;
+}
+#form-message {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#qrcode-container {
+    display: inline-block;
+    padding: 15px;           /* espacio alrededor del QR */
+    border: 5px solid #B7AA92; /* color del marco */
+    border-radius: 12px;     /* esquinas redondeadas */
+    background-color: #fff;  /* fondo dentro del marco */
 }

@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Invitados</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            background-color: #fdf6f0;
+            font-family: 'Arial', sans-serif;
+        }
+        .navbar {
+            background-color: #B7AA92;
+        }
+        .navbar-brand {
+            color: #fff !important;
+            font-weight: bold;
+        }
+        .card {
+            margin-top: 20px;
+        }
+        .table td, .table th {
+            vertical-align: middle;
+        }
+        .btn-qr {
+            background-color: #B7AA92;
+            color: white;
+        }
+        .btn-qr:hover {
+            background-color: #a49780;
+            color: white;
+        }
+        .section-qr {
+            margin-top: 30px;
+        }
+        /* Alerta flotante */
+        #alert-toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            min-width: 200px;
+            z-index: 1055;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Panel Invitados</a>
+        </div>
+    </nav>
+
+    <div class="container my-4">
+        <!-- Buscador -->
+        <div class="input-group mb-3">
+            <input type="text" id="search-name" class="form-control" placeholder="Buscar por nombre..." onkeyup="filtrarTabla()">
+            <button class="btn btn-outline-secondary" onclick="filtrarTabla()">Buscar</button>
+        </div>
+
+        <!-- Tabla de invitados -->
+        <div class="card">
+            <div class="card-header bg-light">
+                <h5>Lista de Invitados</h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered align-middle" id="invitados-table">
+                        <thead class="table-light">
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre</th>
+                                <th>Asistencia</th>
+                                <th>Acompañantes</th>
+                                <th>Mesa</th>
+                                <th>Fecha Registro</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="invitados-tbody">
+                            <!-- Se llenará dinámicamente con JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+<div class="card section-qr">
+  <div class="card-header bg-light">
+    <h5>Buscar Invitado por QR</h5>
+  </div>
+  <div class="card-body">
+    <div id="qr-reader" style="width: 400px; margin: auto;"></div>
+    <div id="qr-result" class="mt-2"></div>
+  </div>
+</div>
+
+
+    <!-- Toast para alertas -->
+    <div id="alert-toast" class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body" id="toast-body">
+                Mesa asignada correctamente!
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Cerrar"></button>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS & dependencias -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- HTML5 QRCode JS -->
+<script src="https://unpkg.com/html5-qrcode"></script>
+    <!-- JS personalizado -->
+    <script>
+        let toast;
+
+        async function cargarInvitados() {
+            const res = await fetch("https://asistenciasweb.azurewebsites.net/invitados");
+            const invitados = await res.json();
+            const tbody = document.getElementById("invitados-tbody");
+            tbody.innerHTML = "";
+
+            invitados.forEach(inv => {
+                const tr = document.createElement("tr");
+                tr.innerHTML = `
+                    <td>${inv.id}</td>
+                    <td>${inv.nombre}</td>
+                    <td>${inv.asistencia ? "Sí" : "No"}</td>
+                    <td>${inv.invitados}</td>
+                    <td>
+                        <input type="text" id="mesa-${inv.id}" class="form-control form-control-sm" value="${inv.mesa || ''}" placeholder="Mesa">
+                    </td>
+                    <td>${inv.fecha_registro || ''}</td>
+                    <td>
+                        <button class="btn btn-success btn-sm me-1" onclick="asignarMesa(${inv.id})">Asignar</button>
+                        <button class="btn btn-danger btn-sm" onclick="eliminarInvitado(${inv.id})">Eliminar</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        async function asignarMesa(id) {
+            const mesa = document.getElementById(`mesa-${id}`).value;
+            if (!mesa) return;
+            await fetch(`https://asistenciasweb.azurewebsites.net/invitados/${id}/mesa`, {
+                method: "PUT",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ mesa })
+            });
+
+            // Mostrar alerta tipo toast
+            if (!toast) {
+                toast = new bootstrap.Toast(document.getElementById('alert-toast'), { delay: 2000 });
+            }
+            document.getElementById('toast-body').textContent = `Mesa "${mesa}" asignada a invitado ${id}!`;
+            toast.show();
+
+            cargarInvitados();
+        }
+
+        async function eliminarInvitado(id) {
+            if (!confirm("¿Seguro que deseas eliminar esta invitación?")) return;
+            await fetch(`https://asistenciasweb.azurewebsites.net/invitados/${id}`, { method: "DELETE" });
+            cargarInvitados();
+        }
+function onScanSuccess(decodedText, decodedResult) {
+    // decodedText es el contenido del QR
+    console.log(`QR Escaneado: ${decodedText}`);
+    const resultDiv = document.getElementById("qr-result");
+
+    // Consultar backend con el UUID escaneado
+    fetch(`https://asistenciasweb.azurewebsites.net/invitados/qr/${decodedText}`)
+        .then(res => res.json())
+        .then(invitado => {
+            if (!invitado || invitado.status === "not_found") {
+                resultDiv.innerHTML = `<div class="alert alert-warning">Invitado no encontrado</div>`;
+                return;
+            }
+            resultDiv.innerHTML = `
+                <div class="alert alert-info">
+                    <strong>Nombre:</strong> ${invitado.nombre} <br>
+                    <strong>Asistencia:</strong> ${invitado.asistencia ? "Sí" : "No"} <br>
+                    <strong>Acompañantes:</strong> ${invitado.invitados} <br>
+                    <strong>Mesa:</strong> ${invitado.mesa || ''} <br>
+                    <strong>ID:</strong> ${invitado.id}
+                </div>
+            `;
+        })
+        .catch(err => {
+            console.error(err);
+            resultDiv.innerHTML = `<div class="alert alert-danger">Error al buscar invitado</div>`;
+        });
+}
+
+// Inicializar lector QR
+const html5QrCode = new Html5Qrcode("qr-reader");
+html5QrCode.start(
+    { facingMode: "environment" }, // usa la cámara trasera si está disponible
+    {
+        fps: 10,    // escanea 10 veces por segundo
+        qrbox: 250  // tamaño del recuadro QR
+    },
+    onScanSuccess
+).catch(err => {
+    console.error("Error inicializando la cámara", err);
+});
+
+
+        function filtrarTabla() {
+            const input = document.getElementById("search-name").value.toLowerCase();
+            const rows = document.querySelectorAll("#invitados-tbody tr");
+            rows.forEach(row => {
+                const nombre = row.children[1].textContent.toLowerCase();
+                row.style.display = nombre.includes(input) ? "" : "none";
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", cargarInvitados);
+    </script>
+</body>
+</html>
