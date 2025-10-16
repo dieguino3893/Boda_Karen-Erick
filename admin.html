@@ -94,7 +94,7 @@
     <h5>Buscar Invitado por QR</h5>
   </div>
   <div class="card-body">
-    <div id="qr-reader" style="width: 400px; margin: auto;"></div>
+<div id="qr-reader" style="width: 100%; max-width: 400px; margin: auto;"></div>
     <div id="qr-result" class="mt-2"></div>
   </div>
 </div>
@@ -203,17 +203,36 @@ fetch(ruta  + `/qr/${encodeURIComponent(decodedText)}`)
         resultDiv.innerHTML = `<div class="alert alert-danger">Error al buscar invitado</div>`;
     });
 }
+
 // Inicializar lector QR
+const qrContainer = document.getElementById("qr-reader");
+function getQrBoxSize() {
+    // Tamaño del recuadro QR: 70% del ancho del contenedor, máximo 400px
+    const width = qrContainer.offsetWidth;
+    return Math.min(width * 0.7, 400);
+}
 const html5QrCode = new Html5Qrcode("qr-reader");
 html5QrCode.start(
     { facingMode: "environment" }, // usa la cámara trasera si está disponible
     {
         fps: 10,    // escanea 10 veces por segundo
-        qrbox: 250  // tamaño del recuadro QR
+        qrbox: getQrBoxSize() // tamaño del recuadro QR
     },
     onScanSuccess
 ).catch(err => {
     console.error("Error inicializando la cámara", err);
+});
+
+
+// Actualizar qrbox si la ventana cambia de tamaño
+window.addEventListener("resize", () => {
+    html5QrCode.stop().then(() => {
+        html5QrCode.start(
+            { facingMode: "environment" },
+            { fps: 10, qrbox: getQrBoxSize() },
+            onScanSuccess
+        );
+    }).catch(console.error);
 });
 
 
