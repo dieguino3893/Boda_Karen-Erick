@@ -170,7 +170,16 @@ if (downloadBtn) {
         const link = document.createElement("a");
         link.href = canvas.toDataURL("image/png");
         link.download = "invitacion_qr.png";
+        // **INTENTO DE SOLUCIÓN MÁS ROBUSTA PARA MÓVILES:**
+        // Añadir el elemento al cuerpo es a veces necesario para el clic simulado en iOS
+        document.body.appendChild(link);    
         link.click();
+        // Limpiar: Eliminar el enlace del DOM después de un pequeño retraso.
+        // Esto es crucial para la limpieza y a veces resuelve problemas de descarga.
+        setTimeout(() => {
+            document.body.removeChild(link);
+            // También se puede revocar la URL si usas blob/objectURL, pero no aplica aquí (es dataURL)
+        }, 100);
     });
 }
 
