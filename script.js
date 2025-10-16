@@ -112,26 +112,22 @@ if (rsvpForm) {
             if (messageEl) messageEl.textContent = data.message;
 
             const qrContainer = document.getElementById("qrcode");
+// Limpiar QR previo
+if (qrContainer) qrContainer.innerHTML = "";
+if (qrCodeElement && qrCodeElement.clear) qrCodeElement.clear();
+qrCodeElement = null;
 
-            // Limpiar QR previo
-            if (qrContainer) qrContainer.innerHTML = "";
-            if (qrCodeElement && qrCodeElement.clear) qrCodeElement.clear();
-            qrCodeElement = null;
-
-            if (Asistencia && data.uuid) {
-                // Generar nuevo QR solo si asistirá
-                qrCodeElement = new QRCode(qrContainer, {
-                    text: data.uuid,
-                    width: 256,
-                    height: 256,
-                    colorLight: "#ffffff" // Fondo blanco para la zona de silencio
-                });
-
-                if (downloadBtn) downloadBtn.style.display = "inline-block";
-            } else {
-                // Si no asistirá, ocultar el botón
-                if (downloadBtn) downloadBtn.style.display = "none";
-            }
+if (Asistencia && data.uuid) {
+    qrCodeElement = new QRCode(qrContainer, {
+        text: data.uuid,
+        width: 256,
+        height: 256,
+        colorLight: "#ffffff"
+    });
+    if (downloadBtn) downloadBtn.style.display = "inline-block";
+} else {
+    if (downloadBtn) downloadBtn.style.display = "none";
+}s
         })
         .catch(err => {
             console.error(err);
@@ -167,20 +163,18 @@ if (downloadBtn) {
         ctx.drawImage(qrImg, border, border);
 
         // 3. Descargar la imagen desde el canvas
+        if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
+        // iOS: abrir en nueva pestaña
+        window.open(canvas.toDataURL("image/png"), "_blank");
+    } else {
         const link = document.createElement("a");
         link.href = canvas.toDataURL("image/png");
         link.download = "invitacion_qr.png";
-        // **INTENTO DE SOLUCIÓN MÁS ROBUSTA PARA MÓVILES:**
-        // Añadir el elemento al cuerpo es a veces necesario para el clic simulado en iOS
-        document.body.appendChild(link);    
+        document.body.appendChild(link);
         link.click();
-        // Limpiar: Eliminar el enlace del DOM después de un pequeño retraso.
-        // Esto es crucial para la limpieza y a veces resuelve problemas de descarga.
-        setTimeout(() => {
-            document.body.removeChild(link);
-            // También se puede revocar la URL si usas blob/objectURL, pero no aplica aquí (es dataURL)
-        }, 100);
-    });
+        document.body.removeChild(link);
+    }
+});
 }
 
 
