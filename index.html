@@ -188,6 +188,9 @@
         <input type="number" id="guests" name="guests" min="0" max="6" value="0">
         <button type="submit" class="main-backgroundcolor">Enviar</button>
         <button id="download-qr" type="button" style="display: none;" class="main-backgroundcolor">Descargar QR</button>
+        <div id="qrcode-container" style="display: none;">
+    <div id="qrcode"></div>
+</div>
         <div id="form-message"></div>
     </form>
     <div id="form-message"></div>
@@ -217,7 +220,4 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
     <script src="script.js"></script>
 </body>
-<div id="qrcode-container" style="display: none;">
-    <div id="qrcode"></div>
-</div>
 </html>
