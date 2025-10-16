@@ -117,9 +117,9 @@
     <!-- JS personalizado -->
     <script>
         let toast;
-
+        const ruta = "https://netasistencia-bbckcda7hbhpdtgd.eastus-01.azurewebsites.net/asistencia"
         async function cargarInvitados() {
-            const res = await fetch("https://asistenciasweb.azurewebsites.net/invitados");
+            const res = await fetch(ruta);
             const invitados = await res.json();
             const tbody = document.getElementById("invitados-tbody");
             tbody.innerHTML = "";
@@ -147,7 +147,7 @@
         async function asignarMesa(id) {
             const mesa = document.getElementById(`mesa-${id}`).value;
             if (!mesa) return;
-            await fetch(`https://asistenciasweb.azurewebsites.net/invitados/${id}/mesa`, {
+            await fetch(ruta + `/${id}/mesa`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ mesa })
@@ -165,7 +165,7 @@
 
         async function eliminarInvitado(id) {
             if (!confirm("¿Seguro que deseas eliminar esta invitación?")) return;
-            await fetch(`https://asistenciasweb.azurewebsites.net/invitados/${id}`, { method: "DELETE" });
+            await fetch(ruta + `/${id}`, { method: "DELETE" });
             cargarInvitados();
         }
 function onScanSuccess(decodedText, decodedResult) {
@@ -173,30 +173,36 @@ function onScanSuccess(decodedText, decodedResult) {
     console.log(`QR Escaneado: ${decodedText}`);
     const resultDiv = document.getElementById("qr-result");
 
-    // Consultar backend con el UUID escaneado
-    fetch(`https://asistenciasweb.azurewebsites.net/invitados/qr/${decodedText}`)
-        .then(res => res.json())
-        .then(invitado => {
-            if (!invitado || invitado.status === "not_found") {
-                resultDiv.innerHTML = `<div class="alert alert-warning">Invitado no encontrado</div>`;
-                return;
-            }
-            resultDiv.innerHTML = `
-                <div class="alert alert-info">
-                    <strong>Nombre:</strong> ${invitado.nombre} <br>
-                    <strong>Asistencia:</strong> ${invitado.asistencia ? "Sí" : "No"} <br>
-                    <strong>Acompañantes:</strong> ${invitado.invitados} <br>
-                    <strong>Mesa:</strong> ${invitado.mesa || ''} <br>
-                    <strong>ID:</strong> ${invitado.id}
-                </div>
-            `;
-        })
-        .catch(err => {
-            console.error(err);
-            resultDiv.innerHTML = `<div class="alert alert-danger">Error al buscar invitado</div>`;
-        });
-}
+   // Consultar backend con el UUID escaneado
+fetch(ruta  + `/qr/${encodeURIComponent(decodedText)}`)
+    .then(res => {
+        if (!res.ok) {
+            throw new Error("Invitado no encontrado");
+        }
+        return res.json();
+    })
+    .then(invitado => {
+        if (!invitado) {
+            resultDiv.innerHTML = `<div class="alert alert-warning">Invitado no encontrado</div>`;
+            return;
+        }
 
+        resultDiv.innerHTML = `
+            <div class="alert alert-info">
+                <strong>Nombre:</strong> ${invitado.nombre} <br>
+                <strong>Asistencia:</strong> ${invitado.asistencia ? "Sí" : "No"} <br>
+                <strong>Acompañantes:</strong> ${invitado.invitados} <br>
+                <strong>Mesa:</strong> ${invitado.mesa || 'Sin asignar'} <br>
+                <strong>ID:</strong> ${invitado.id} <br>
+                <strong>Fecha de registro:</strong> ${new Date(invitado.fecha_registro).toLocaleString()}
+            </div>
+        `;
+    })
+    .catch(err => {
+        console.error(err);
+        resultDiv.innerHTML = `<div class="alert alert-danger">Error al buscar invitado</div>`;
+    });
+}
 // Inicializar lector QR
 const html5QrCode = new Html5Qrcode("qr-reader");
 html5QrCode.start(

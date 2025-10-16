@@ -94,17 +94,17 @@ if (rsvpForm) {
     rsvpForm.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        const name = document.getElementById("name").value;
+        const Nombre = document.getElementById("name").value;
         const attendanceValue = document.getElementById("attendance").value;
-        const attendance = attendanceValue.toLowerCase() === "si"; // true si "si", false si "no"
-        const guests = parseInt(document.getElementById("guests").value, 10);
+        const Asistencia = attendanceValue.toLowerCase() === "si"; // true si "si", false si "no"
+        const Invitados = parseInt(document.getElementById("guests").value, 10);
         // Fecha de registro en formato ISO (compatible con DATETIME de SQL Server)
-        const fechaRegistro = new Date().toISOString();
-        console.log("Fecha de registro:", fechaRegistro);
-        fetch("https://asistenciasweb.azurewebsites.net/asistencia", {
+        const fecha_registro = new Date().toISOString();
+        console.log("Fecha de registro:", fecha_registro);
+        fetch("https://netasistencia-bbckcda7hbhpdtgd.eastus-01.azurewebsites.net/asistencia", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, attendance, guests, fechaRegistro })
+            body: JSON.stringify({Nombre, Asistencia, Invitados, fecha_registro})
         })
         .then(res => res.json())
         .then(data => {
@@ -118,7 +118,7 @@ if (rsvpForm) {
             if (qrCodeElement && qrCodeElement.clear) qrCodeElement.clear();
             qrCodeElement = null;
 
-            if (attendance && data.uuid) {
+            if (Asistencia && data.uuid) {
                 // Generar nuevo QR solo si asistirá
                 qrCodeElement = new QRCode(qrContainer, {
                     text: data.uuid,
@@ -132,8 +132,6 @@ if (rsvpForm) {
                 // Si no asistirá, ocultar el botón
                 if (downloadBtn) downloadBtn.style.display = "none";
             }
-
-            rsvpForm.reset();
         })
         .catch(err => {
             console.error(err);
