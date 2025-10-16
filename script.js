@@ -144,29 +144,63 @@ if (rsvpForm) {
 // Descargar QR como imagen
 if (downloadBtn) {
     downloadBtn.addEventListener("click", () => {
-        const qrImg = document.querySelector("#qrcode img");
-        if (!qrImg || !qrImg.src) {
-            console.error("No se encontró la imagen del QR para descargar.");
-            return;
-        }
+        // Esperar un poco para asegurar que la imagen esté cargada
+        setTimeout(() => {
+            const qrImg = document.querySelector("#qrcode img");
+            const qrCanvas = document.querySelector("#qrcode canvas");
+            
+            // Buscar primero el canvas, luego la imagen
+            const sourceElement = qrCanvas || qrImg;
+            
+            if (!sourceElement) {
+                alert("Por favor espera un momento e intenta nuevamente.");
+                console.error("No se encontró el QR para descargar.");
+                return;
+            }
 
-        // Crear un canvas para añadir el borde blanco (quiet zone)
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-        const border = 20; // 20px de borde blanco
-        const qrSize = qrImg.width;
+            // Crear un canvas para añadir el borde blanco (quiet zone)
+            const canvas = document.createElement("canvas");
+            const ctx = canvas.getContext("2d");
+            const border = 20; // 20px de borde blanco
+            
+            // Obtener tamaño del QR
+            let qrSize;
+            if (qrCanvas) {
+                qrSize = qrCanvas.width;
+            } else {
+                qrSize = qrImg.naturalWidth || qrImg.width || 256;
+            }
 
-        canvas.width = qrSize + border * 2;
-        canvas.height = qrSize + border * 2;
+            canvas.width = qrSize + border * 2;
+            canvas.height = qrSize + border * 2;
 
-        // 1. Rellenar el fondo de blanco
-        ctx.fillStyle = "#ffffff";
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
+            // 1. Rellenar el fondo de blanco
+            ctx.fillStyle = "#ffffff";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // 2. Dibujar la imagen del QR sobre el fondo blanco
-        ctx.drawImage(qrImg, border, border);
+            // 2. Dibujar el QR sobre el fondo blanco
+            if (qrCanvas) {
+                ctx.drawImage(qrCanvas, border, border);
+            } else {
+                // Asegurar que la imagen esté cargada
+                if (qrImg.complete) {
+                    ctx.drawImage(qrImg, border, border, qrSize, qrSize);
+                } else {
+                    qrImg.onload = () => {
+                        ctx.drawImage(qrImg, border, border, qrSize, qrSize);
+                        descargarCanvas(canvas);
+                    };
+                    return;
+                }
+            }
 
-        // Descargar
+            descargarCanvas(canvas);
+        }, 300); // Pequeño delay para asegurar que el QR esté renderizado
+    });
+}
+
+function descargarCanvas(canvas) {
+    // Descargar
     if (/iPad|iPhone|iPod/.test(navigator.userAgent)) {
         // iOS: abrir en nueva pestaña
         window.open(canvas.toDataURL("image/png"), "_blank");
@@ -178,7 +212,6 @@ if (downloadBtn) {
         link.click();
         document.body.removeChild(link);
     }
-});
 }
 
 
