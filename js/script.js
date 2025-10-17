@@ -85,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
     updateOverlayCountdown();
 
     
-    // ---------- 7. Formulario RSVP + QR ----------
+// ---------- 7. Formulario RSVP + QR ----------
 const rsvpForm = document.getElementById("rsvp-form");
 const downloadBtn = document.getElementById("download-qr");
 let qrCodeElement = null;
@@ -141,7 +141,7 @@ if (rsvpForm) {
     });
 }
 
-// Descargar QR como imagen
+// Descargar QR como imagen con marco dorado
 if (downloadBtn) {
     downloadBtn.addEventListener("click", () => {
         // Esperar un poco para asegurar que la imagen esté cargada
@@ -158,7 +158,7 @@ if (downloadBtn) {
                 return;
             }
 
-            // Crear un canvas para añadir el borde blanco (quiet zone)
+            // Crear un canvas para añadir el borde blanco (quiet zone) y marco dorado
             const canvas = document.createElement("canvas");
             const ctx = canvas.getContext("2d");
             const border = 20; // 20px de borde blanco
@@ -178,7 +178,53 @@ if (downloadBtn) {
             ctx.fillStyle = "#ffffff";
             ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-            // 2. Dibujar el QR sobre el fondo blanco
+            // 2. Dibujar marco dorado decorativo
+            const frameWidth = 8;
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, "#D4AF37");
+            gradient.addColorStop(0.5, "#F4E5C3");
+            gradient.addColorStop(1, "#D4AF37");
+            
+            // Marco exterior dorado
+            ctx.strokeStyle = gradient;
+            ctx.lineWidth = frameWidth;
+            ctx.strokeRect(frameWidth/2, frameWidth/2, canvas.width - frameWidth, canvas.height - frameWidth);
+            
+            // Línea decorativa interna
+            ctx.strokeStyle = "#C9A961";
+            ctx.lineWidth = 2;
+            ctx.strokeRect(frameWidth + 3, frameWidth + 3, canvas.width - (frameWidth + 3)*2, canvas.height - (frameWidth + 3)*2);
+            
+            // Detalles de esquina
+            const cornerSize = 20;
+            ctx.strokeStyle = "#D4AF37";
+            ctx.lineWidth = 3;
+            // Esquina superior izquierda
+            ctx.beginPath();
+            ctx.moveTo(frameWidth + 8, frameWidth + cornerSize);
+            ctx.lineTo(frameWidth + 8, frameWidth + 8);
+            ctx.lineTo(frameWidth + cornerSize, frameWidth + 8);
+            ctx.stroke();
+            // Esquina superior derecha
+            ctx.beginPath();
+            ctx.moveTo(canvas.width - frameWidth - cornerSize, frameWidth + 8);
+            ctx.lineTo(canvas.width - frameWidth - 8, frameWidth + 8);
+            ctx.lineTo(canvas.width - frameWidth - 8, frameWidth + cornerSize);
+            ctx.stroke();
+            // Esquina inferior izquierda
+            ctx.beginPath();
+            ctx.moveTo(frameWidth + 8, canvas.height - frameWidth - cornerSize);
+            ctx.lineTo(frameWidth + 8, canvas.height - frameWidth - 8);
+            ctx.lineTo(frameWidth + cornerSize, canvas.height - frameWidth - 8);
+            ctx.stroke();
+            // Esquina inferior derecha
+            ctx.beginPath();
+            ctx.moveTo(canvas.width - frameWidth - cornerSize, canvas.height - frameWidth - 8);
+            ctx.lineTo(canvas.width - frameWidth - 8, canvas.height - frameWidth - 8);
+            ctx.lineTo(canvas.width - frameWidth - 8, canvas.height - frameWidth - cornerSize);
+            ctx.stroke();
+
+            // 3. Dibujar el QR sobre el fondo blanco
             if (qrCanvas) {
                 ctx.drawImage(qrCanvas, border, border);
             } else {
@@ -221,13 +267,14 @@ const guestsContainer = document.getElementById("guests-text");
 const guestsInput = document.getElementById("guests");
 
 if (attendanceSelect && guestsContainer && guestsInput) {
-    guestsContainer.style.display = "none"; // ocultar contenedor completo
+    guestsContainer.style.display = "block"; 
+    guestsInput.disabled = true;// ocultar contenedor completo
     attendanceSelect.addEventListener("change", () => {
         if (attendanceSelect.value === "si") {
             guestsContainer.style.display = "block";
             guestsInput.disabled = false;
         } else {
-            guestsContainer.style.display = "none";
+            guestsContainer.style.display = "block";
             guestsInput.disabled = true;
             guestsInput.value = 0;
         }
