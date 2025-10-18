@@ -93,14 +93,14 @@ let qrCodeElement = null;
 if (rsvpForm) {
     rsvpForm.addEventListener("submit", (e) => {
         e.preventDefault();
-
+         const messageEl = document.getElementById("form-message");
         const Nombre = document.getElementById("name").value;
         const attendanceValue = document.getElementById("attendance").value;
         const Asistencia = attendanceValue.toLowerCase() === "si"; // true si "si", false si "no"
         const Invitados = parseInt(document.getElementById("guests").value, 10);
         // Fecha de registro en formato ISO (compatible con DATETIME de SQL Server)
         const fecha_registro = new Date().toISOString();
-        console.log("Fecha de registro:", fecha_registro);
+        if (messageEl) messageEl.textContent = "Por favor espera... no olvides descargar tu invitación QR si asistirás.";
         fetch("https://netasistencia-bbckcda7hbhpdtgd.eastus-01.azurewebsites.net/asistencia", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -108,9 +108,11 @@ if (rsvpForm) {
         })
         .then(res => res.json())
         .then(data => {
-            const messageEl = document.getElementById("form-message");
-            if (messageEl) messageEl.textContent = data.message;
-
+            if (!Asistencia) {
+                if (messageEl) messageEl.textContent = "Una pena que no puedas asistir. Gracias por avisar.";
+            } else {
+                if (messageEl) messageEl.textContent = "¡Gracias por confirmar! Por favor descarga tu invitación QR 🥳";
+            }
             const qrContainer = document.getElementById("qrcode");
 
             // Limpiar QR previo
