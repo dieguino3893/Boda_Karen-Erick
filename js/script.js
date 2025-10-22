@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
+    // ---------- PING para despertar el servidor ----------
+    // Se envía una petición al cargar la página para asegurar que el backend esté activo.
+    fetch("https://netasistencia-bbckcda7hbhpdtgd.eastus-01.azurewebsites.net/asistencia/wakeup")
+        .then(res => res.json())
+        .then(data => console.log(data.message || "Ping al servidor completado."))
+        .catch(err => console.error("No se pudo hacer ping al servidor (puede estar iniciándose):", err));
+
     // ---------- 1. Animación con Intersection Observer ----------
     const fadeElements = document.querySelectorAll("h1, h2, p, img, .box, .container-img");
     const observer = new IntersectionObserver((entries) => {
