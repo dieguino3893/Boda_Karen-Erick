@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     // ---------- PING para despertar el servidor ----------
     // Se envía una petición al cargar la página para asegurar que el backend esté activo.
-    fetch("http://localhost:5114/asistencia/wakeup")
+    fetch("https://netasistencia-bbckcda7hbhpdtgd.eastus-01.azurewebsites.net/asistencia/wakeup")
         .then(res => res.json())
         .then(data => console.log(data.message || "Ping al servidor completado."))
         .catch(err => console.error("No se pudo hacer ping al servidor (puede estar iniciándose):", err));
@@ -108,7 +108,7 @@ if (rsvpForm) {
         // Fecha de registro en formato ISO (compatible con DATETIME de SQL Server)
         const fecha_registro = new Date().toISOString();
         if (messageEl) messageEl.textContent = "Por favor espera... no olvides descargar tu invitación QR si asistirás.";
-        fetch("http://localhost:5114/asistencia", {
+        fetch("https://netasistencia-bbckcda7hbhpdtgd.eastus-01.azurewebsites.net/asistencia", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({Nombre, Asistencia, Invitados, fecha_registro})
