@@ -1,25 +1,25 @@
   let toast;
-        const ruta = "https://netasistencia-bbckcda7hbhpdtgd.eastus-01.azurewebsites.net/asistencia"
+        const ruta = "http://localhost:5114/asistencia"
         async function cargarInvitados() {
             const res = await fetch(ruta);
             const invitados = await res.json();
             const tbody = document.getElementById("invitados-tbody");
             tbody.innerHTML = "";
 
-            invitados.forEach(inv => {
+            invitados.forEach((inv, index) => {
                 const tr = document.createElement("tr");
                 tr.innerHTML = `
-                    <td>${inv.id}</td>
+                    <td>${index + 1}</td>
                     <td>${inv.nombre}</td>
                     <td>${inv.asistencia ? "Sí" : "No"}</td>
                     <td>${inv.invitados}</td>
                     <td>
                         <input type="text" id="mesa-${inv.id}" class="form-control form-control-sm" value="${inv.mesa || ''}" placeholder="Mesa">
                     </td>
-                    <td>${inv.fecha_registro || ''}</td>
+                    <td>${inv.fecha_registro ? new Date(inv.fecha_registro).toLocaleString() : ''}</td>
                     <td>
-                        <button class="btn btn-success btn-sm me-1" onclick="asignarMesa(${inv.id})">Asignar</button>
-                        <button class="btn btn-danger btn-sm" onclick="eliminarInvitado(${inv.id})">Eliminar</button>
+                        <button class="btn btn-success btn-sm me-1" onclick="asignarMesa('${inv.id}')">Asignar</button>
+                        <button class="btn btn-danger btn-sm" onclick="eliminarInvitado('${inv.id}')">Eliminar</button>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -50,7 +50,7 @@
             await fetch(ruta + `/${id}`, { method: "DELETE" });
             cargarInvitados();
         }
-function onScanSuccess(decodedText, decodedResult) {
+function onScanSuccess(decodedText) {
     // decodedText es el contenido del QR
     console.log(`QR Escaneado: ${decodedText}`);
     const resultDiv = document.getElementById("qr-result");
