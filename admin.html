@@ -24,6 +24,37 @@
             <button class="btn btn-outline-secondary" onclick="filtrarTabla()">Buscar</button>
         </div>
 
+        <!-- Formulario para agregar invitados -->
+        <div class="card mb-3">
+            <div class="card-header bg-light">
+                <h5>Agregar Invitado</h5>
+            </div>
+            <div class="card-body">
+                <form id="add-invitado-form" onsubmit="event.preventDefault(); agregarInvitado();">
+                    <div class="row g-2 align-items-end">
+                        <div class="col-md-5">
+                            <label class="form-label">Nombre</label>
+                            <input id="nuevo-nombre" class="form-control" required />
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">Acompañantes</label>
+                            <input id="nuevo-invitados" type="number" min="0" max="6" value="0" class="form-control" />
+                        </div>
+                        <div class="col-md-2">
+                            <label class="form-label">Asistencia</label>
+                            <select id="nuevo-asistencia" class="form-select">
+                                <option value="false" selected>No</option>
+                                <option value="true">Sí</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 text-end">
+                            <button type="submit" class="btn btn-primary">Agregar Invitado</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
         <!-- Tabla de invitados -->
         <div class="card">
             <div class="card-header bg-light">

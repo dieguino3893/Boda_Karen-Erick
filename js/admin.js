@@ -1,5 +1,5 @@
   let toast;
-        const ruta = "https://netasistencia-bbckcda7hbhpdtgd.eastus-01.azurewebsites.net/asistencia"
+        const ruta = "http://localhost:5114/asistencia"
         async function cargarInvitados() {
             const res = await fetch(ruta);
             const invitados = await res.json();
@@ -18,8 +18,11 @@
                     </td>
                     <td>${inv.fecha_registro ? new Date(inv.fecha_registro).toLocaleString() : ''}</td>
                     <td>
-                        <button class="btn btn-success btn-sm me-1" onclick="asignarMesa('${inv.id}')">Asignar</button>
-                        <button class="btn btn-danger btn-sm" onclick="eliminarInvitado('${inv.id}')">Eliminar</button>
+                        <div class="btn-group" role="group">
+                          <button class="btn btn-success btn-sm" onclick="asignarMesa('${inv.id}')">Asignar</button>
+                          <button class="btn btn-secondary btn-sm" onclick="copiarEnlace('${inv.uuid}')">Copiar enlace</button>
+                          <button class="btn btn-danger btn-sm" onclick="eliminarInvitado('${inv.id}')">Eliminar</button>
+                        </div>
                     </td>
                 `;
                 tbody.appendChild(tr);
@@ -32,7 +35,7 @@
             await fetch(ruta + `/${id}/mesa`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ mesa })
+                body: JSON.stringify({ Mesa: Number(mesa) })
             });
 
             // Mostrar alerta tipo toast
@@ -48,6 +51,58 @@
         async function eliminarInvitado(id) {
             if (!confirm("¿Seguro que deseas eliminar esta invitación?")) return;
             await fetch(ruta + `/${id}`, { method: "DELETE" });
+            cargarInvitados();
+        }
+        
+        // Copiar enlace público para que el invitado acceda a /test.html/{uuid}
+        function copiarEnlace(uuid) {
+            if (!uuid) return alert('UUID no disponible');
+            const origin = window.location.origin || (window.location.protocol + '//' + window.location.host);
+            // Usar query param 'datos' para evitar problemas con servidores que tratan segmentos como rutas físicas
+            const link = `${origin}/test.html?datos=${encodeURIComponent(uuid)}`;
+            navigator.clipboard.writeText(link).then(() => {
+                if (!toast) {
+                    toast = new bootstrap.Toast(document.getElementById('alert-toast'), { delay: 2000 });
+                }
+                document.getElementById('toast-body').textContent = `Enlace copiado: ${link}`;
+                toast.show();
+            }).catch(err => {
+                console.error('Error copiando enlace', err);
+                alert('No se pudo copiar el enlace.');
+            });
+        }
+
+        // Agregar nuevo invitado desde el formulario
+        async function agregarInvitado() {
+            const nombre = document.getElementById('nuevo-nombre').value.trim();
+            const invitadosNum = Number(document.getElementById('nuevo-invitados').value || 0);
+            const asistenciaVal = document.getElementById('nuevo-asistencia').value === 'true';
+            if (!nombre) return alert('Nombre es requerido');
+
+            const payload = { nombre: nombre, asistencia: asistenciaVal, invitados: invitadosNum };
+            const res = await fetch(ruta, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload)
+            });
+
+            if (!res.ok) {
+                const err = await res.json().catch(()=>null);
+                console.error('Error al crear invitado', err);
+                return alert('Error al crear invitado');
+            }
+
+            const data = await res.json();
+            if (!toast) {
+                toast = new bootstrap.Toast(document.getElementById('alert-toast'), { delay: 2000 });
+            }
+            document.getElementById('toast-body').textContent = `Invitado agregado: ${nombre}`;
+            toast.show();
+
+            // Limpiar formulario
+            document.getElementById('add-invitado-form').reset();
+
+            // Recargar tabla
             cargarInvitados();
         }
 function onScanSuccess(decodedText) {

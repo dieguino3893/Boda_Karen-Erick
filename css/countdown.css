@@ -1,0 +1,113 @@
+/* RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* HERO */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100dvh;
+  overflow: hidden;
+  background: #000;
+}
+
+/* VIDEO BLUR FONDO */
+.hero-video-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(28px) brightness(0.6);
+  transform: scale(1.25);
+  z-index: 1;
+}
+
+/* VIDEO PRINCIPAL */
+.hero-video-main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+}
+
+/* BOTÓN PLAY */
+.play-center-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 4;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  background: rgba(255,255,255,0.2);
+  color: #fff;
+  font-size: 38px;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.play-center-btn:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+  background: rgba(255,255,255,0.35);
+}
+
+/* OVERLAY COUNTDOWN */
+.overlay-content {
+  position: absolute;
+  bottom: 15%;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  opacity: 0;
+  z-index: 3;
+}
+
+.overlay-content.active {
+  animation: fadeInUp 1.2s ease forwards;
+}
+
+/* COUNTDOWN */
+.countdown-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 300px;
+}
+
+.countdown-unit {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.countdown-unit span {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: normal;
+}
+
+/* ANIMACIÓN */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 📱 MOBILE */
+@media (max-width: 768px) {
+  .hero-video-main {
+    object-fit: contain;
+  }
+}

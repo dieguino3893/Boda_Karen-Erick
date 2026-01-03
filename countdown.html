@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boda</title>
+    <meta name="description" content="Invitación a nuestra boda. Acompáñanos en este día especial.">
+    <link rel="stylesheet" href="./css/countdown.css">
+</head>
+
+<body>
+
+<section class="hero">
+
+    <!-- VIDEO FONDO BLUR -->
+    <!-- RECOMENDACIÓN: Generar una imagen 'poster.jpg' ligera para mostrar mientras carga el video -->
+    <video class="hero-video-bg" muted playsinline preload="metadata" poster="./resources/poster.png">
+        <!-- OPTIMIZACIÓN: El navegador intentará cargar primero los videos ligeros -->
+        <source src="./resources/IMG_1850_low.webm" type="video/webm">
+       
+    </video>
+
+    <!-- VIDEO PRINCIPAL -->
+    <video id="heroVideo" class="hero-video-main" muted playsinline preload="metadata" poster="./resources/poster.png">
+        <source src="./resources/IMG_1850.webm" type="video/webm">
+    </video>
+
+    <!-- BOTÓN PLAY -->
+    <button id="playBtn" class="play-center-btn" aria-label="Reproducir video de invitación">▶</button>
+
+    <!-- COUNTDOWN -->
+    <div class="overlay-content">
+        <div class="countdown-container">
+            <div class="countdown-unit" id="days">00<span>Días</span></div>
+            <div class="countdown-unit" id="hours">00<span>Horas</span></div>
+            <div class="countdown-unit" id="minutes">00<span>Min</span></div>
+            <div class="countdown-unit" id="seconds">00<span>Seg</span></div>
+        </div>
+    </div>
+
+</section>
+
+<!-- QR library -->
+<script src="./js/countdown.js"></script>
+
+<!-- Script: recibir 'datos' desde URL /test.html/datos y consultar backend -->
+<script>
+    const video = document.getElementById('heroVideo');
+    const bgVideo = document.querySelector(".hero-video-bg");
+    const playBtn = document.getElementById('playBtn');
+    const overlay = document.querySelector('.overlay-content');
+
+    let countdownStarted = false;
+    let countdownInterval = null;
+
+    playBtn.addEventListener('click', () => {
+        video.muted = false;
+        video.currentTime = 0;
+        bgVideo.currentTime = 0;
+        video.play();
+        bgVideo.play();
+        playBtn.style.display = 'none';
+        
+        // Sincronización de seguridad por si el bgVideo tiene un ligero retraso
+        bgVideo.currentTime = video.currentTime;
+
+
+         // ⏱️ ESPERAR A QUE TERMINE EL VIDEO
+        video.addEventListener('ended', () => {
+            overlay.classList.add('active');
+            // La cuenta regresiva ya corre automáticamente en enero2.js, no es necesario llamarla aquí.
+        }, { once: true });
+    });
+</script>
+</body>
+</html>

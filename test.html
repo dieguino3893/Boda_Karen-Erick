@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Boda</title>
+    <link href="https://fonts.cdnfonts.com/css/miama" rel="stylesheet">
+    <link rel="stylesheet" href="./css/index.css">
+    <style>
+        /* Estilos para la tarjeta centrada con QR */
+        .invite-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+        }
+        .invite-card {
+            width: 360px;
+            max-width: 92vw;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+            padding: 22px;
+            text-align: center;
+            font-family: 'miama', system-ui, sans-serif;
+            color: #111;
+        }
+        .invite-title {
+            font-size: 36px;
+            margin-bottom: 6px;
+            line-height: 1;
+        }
+        .invite-sub { color: #666; font-size: 12px; margin-bottom: 14px; }
+        .qr-box { margin: 12px auto; width: 220px; height: 220px; display:flex; justify-content:center; align-items:center; }
+        /* Asegurar que los elementos generados por qrcodejs sean visibles */
+        #qrcode { width:210px; height:210px; background:#ffffff; display:block; }
+        #qrcode canvas, #qrcode img, #qrcode table { width:210px !important; height:210px !important; display:block; margin:0 auto; background:#ffffff; }
+        .guest-name { font-weight:700; font-size:18px; margin-top:12px; }
+        .guest-info { font-size:13px; color:#444; margin-top:8px; }
+        .guest-link { font-size:12px; color:#777; margin-top:10px; word-break:break-all }
+        /* Anular animación global que oculta .box (opacity:0) */
+        #asistencia,
+        #asistencia .invite-wrapper,
+        #asistencia .invite-card,
+        #asistencia .invite-title,
+        #asistencia .invite-sub,
+        #asistencia .qr-box,
+        #asistencia #qrcode {
+            opacity: 1 !important;
+            transform: none !important;
+        }
+    </style>
+</head>
+
+<body>
+<audio id="bg-music" loop>
+    <source src="./resources/Something.mp3" type="audio/mpeg">
+</audio>
+
+<!-- HERO -->
+<section class="hero">
+    <img class="hero-img" src="./img/principal.webp" alt="Imagen principal">
+    <div class="overlay-content">
+        <div class="countdown-container">
+            <div class="countdown-unit" id="days">00<span>Días</span></div>
+            <div class="countdown-unit" id="hours">00<span>Horas</span></div>
+            <div class="countdown-unit" id="minutes">00<span>Minutos</span></div>
+            <div class="countdown-unit" id="seconds">00<span>Segundos</span></div>
+        </div>
+        <div class="name-overlay">
+            <span>Karen</span>
+            <span>&</span>
+            <span>Erick</span>
+        </div>
+    </div>
+</section>
+
+<main>
+    <!-- WEDDING SECTION ENCAPSULADA -->
+    <div class="wedding-section">
+
+        <!-- Invitación -->
+        <div class="box">
+            <h2 class="mainText">¡Estás Invitado!</h2>
+            <p>Queremos que seas parte de este momento tan especial en nuestras vidas</p>
+            <div class="divider">
+                <span class="divider-icon">❖</span>
+            </div>
+        </div>
+
+        <!-- Detalles -->
+        <div class="details">
+            <div class="box">
+                <img src="./img/Anillo.png" alt="Anillo">
+                <h2>CEREMONIA</h2>
+                <p>Iglesia Santísima Virgen</p>
+                <p>Te esperamos el</p>
+                <div class="date-celebration">
+                    <div>
+                        <p>27 SEP</p>
+                    </div>
+                    <div>
+                        <p class="hour">19:00 <span>P.M</span></p>
+                    </div>
+                </div>
+                <p>Avenida Uno 19</p>
+                <p>Ciudad de lugar, País</p>
+                <button class="ubication" onclick="alert('Abrir Google Maps')">Ver Ubicación</button>
+            </div>
+            <div class="box">
+                <img src="./img/dresscode.jpg" alt="Dress Code">
+                <h2>DRESS CODE</h2>
+                <p>Formal - No Niños</p>
+            </div>
+        </div>
+
+        <!-- Itinerario -->
+        <section id="itinerario">
+            <div class="header-itinerario">
+                <h1>El Gran Día</h1>
+                <p>NO TE PIERDAS NINGÚN MOMENTO</p>
+            </div>
+            <div class="linea-tiempo">
+                <div class="evento">
+                    <div class="detalle-evento">
+                        <p>CEREMONIA RELIGIOSA</p>
+                        <p>16:45 HRS</p>
+                    </div>
+                    <div class="icono-evento">
+                        <img src="./img/iglesia_icon.png" alt="Iglesia">
+                    </div>
+                </div>
+                <div class="evento">
+                    <div class="detalle-evento">
+                        <p>RECEPCIÓN</p>
+                        <p>18:45 HRS</p>
+                    </div>
+                    <div class="icono-evento">
+                        <img src="./img/recepcion_icon.png" alt="Recepción">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Sección Nosotros / Galería -->
+    <section id="galeria" class="main-backgroundcolor collage">
+        <h2 class="mainText">NOSOTROS</h2>
+        <div class="container-img">
+            <div class="box-img"><img src="./img/image1.jpeg" alt="img-galeria"></div>
+            <div class="box-img"><img src="./img/image2.jpg" alt="img-galeria"></div>
+            <div class="box-img"><img src="./img/image3.webp" alt="img-galeria"></div>
+            <div class="box-img"><img src="./img/image4.jpg" alt="img-galeria"></div>
+            <div class="box-img"><img src="./img/image1.jpeg" alt="img-galeria"></div>
+            <div class="box-img"><img src="./img/img1.jpeg" alt="img-galeria"></div>
+            <div class="box-img"><img src="./img/image3.webp" alt="img-galeria"></div>
+        </div>
+    </section>
+
+    <!-- Sección Asistencia -->
+    <section id="asistencia" class="box">
+        <h2>Confirma tu asistencia</h2>
+        <form id="rsvp-form">
+            <label for="name">Nombre completo:</label>
+            <input type="text" id="name" name="name" required>
+            <label for="attendance">¿Asistirás?</label>
+            <select id="attendance" name="attendance" required>
+                <option value="">Selecciona...</option>
+                <option value="si">Sí</option>
+                <option value="no">No</option>
+            </select>
+            <label for="guests">Número de acompañantes:</label>
+            <input type="number" id="guests" name="guests" min="0" max="6" value="0">
+            <button type="submit" class="main-backgroundcolor">Enviar</button>
+            <div id="form-message"></div>
+        </form>
+    </section>
+
+    <!-- Sección Regalos -->
+    <section id="regalos" class="box">
+        <div class="box" id="regalos">
+            <img src="./img/regalo.jpg" alt="icono">
+            <h2>REGALOS</h2>
+            <p>Lo más importante es tu presencia, pero si deseas hacernos un regalo es bienvenido</p>
+        </div>
+    </section>
+</main>
+
+<!-- Panel de navegación -->
+<nav class="panel-navegacion">
+    <ul>
+        <li><a href="#galeria"><img src="./img/galeria.png" alt="Galeria"></a></li>
+        <li><a href="#itinerario"><img src="./img/itinerario.png" alt="itinerario"></a></li>
+        <li><a href="#asistencia"><img src="./img/entrada.png" alt="Asistencia"></a></li>
+        <li><a href="#regalos"><img src="./img/regalo_crono.png" alt="Regalos"></a></li>
+    </ul>
+</nav>
+
+<!-- QR library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="./js/script.js"></script>
+
+<!-- Script: recibir 'datos' desde URL /test.html/datos y consultar backend -->
+<script>
+    (function(){
+        const ruta = "http://localhost:5114/asistencia";
+
+        function renderInvitado(invitado) {
+            const section = document.getElementById('asistencia');
+            const origin = window.location.origin || (window.location.protocol + '//' + window.location.host);
+            const publicLink = `${origin}/test.html?datos=${encodeURIComponent(invitado.uuid || invitado.Uuid || '')}`;
+            section.innerHTML = `
+                <div class="invite-wrapper">
+                  <div class="invite-card">
+                    <div class="invite-title">Registry</div>
+                    <div class="invite-sub">Scan to view the invitation details</div>
+                    <div id="qrcode" class="qr-box"></div>
+                    <div class="guest-name">${invitado.nombre}</div>
+                    <div class="guest-info">Asistencia: ${invitado.asistencia ? 'Sí' : 'No'} • Acompañantes: ${invitado.invitados}</div>
+                    <div class="guest-link">${publicLink}</div>
+                  </div>
+                </div>
+            `;
+
+            // Generar QR usando exactamente el valor de ?datos= si existe, sino el uuid del invitado
+            try {
+                const qrcodeEl = document.getElementById('qrcode');
+                qrcodeEl.innerHTML = '';
+                const urlParams = new URLSearchParams(window.location.search);
+                const datosParam = urlParams.get('datos');
+                const qrText = datosParam || invitado.uuid || invitado.Uuid || '';
+
+                // Ejecutar después del layout para evitar problemas de tamaño cero
+                requestAnimationFrame(() => {
+                    try {
+                        // eliminar hijos previos por si acaso
+                        while (qrcodeEl.firstChild) qrcodeEl.removeChild(qrcodeEl.firstChild);
+                        new QRCode(qrcodeEl, {
+                            text: qrText,
+                            width: 210,
+                            height: 210,
+                            colorDark : "#000000",
+                            colorLight : "#ffffff",
+                            correctLevel : QRCode.CorrectLevel.H
+                        });
+                        // asegurar que la imagen (si existe) tenga contraste
+                        const img = qrcodeEl.querySelector('img');
+                        if (img) img.style.background = '#ffffff';
+                    } catch(e) {
+                        console.error('Error generando QR dentro de RAF', e);
+                    }
+                });
+            } catch(e) {
+                console.error('No se pudo generar el QR (externo)', e);
+            }
+        }
+
+        function showError(msg) {
+            const section = document.getElementById('asistencia');
+            const el = document.createElement('div');
+            el.className = 'box';
+            el.innerHTML = `<div class="alert alert-danger">${msg}</div>`;
+            section.appendChild(el);
+        }
+
+        // Soportar query param '?datos=...' y también, como fallback, segmento '/test.html/<datos>'
+        const urlParams = new URLSearchParams(window.location.search);
+        const datosParam = urlParams.get('datos');
+        let datosToUse = null;
+
+        if (datosParam) {
+            datosToUse = datosParam;
+        } else {
+            const path = window.location.pathname || '';
+            const parts = path.split('/').filter(Boolean);
+            const last = parts[parts.length - 1] || '';
+            if (last && !last.toLowerCase().endsWith('test.html')) {
+                datosToUse = last;
+            }
+        }
+
+        if (datosToUse) {
+            fetch(ruta + '/qr/' + encodeURIComponent(datosToUse))
+                .then(res => {
+                    if (!res.ok) throw new Error('Invitado no encontrado');
+                    return res.json();
+                })
+                .then(inv => renderInvitado(inv))
+                .catch(err => {
+                    console.error(err);
+                    showError('No se encontró el invitado o hubo un error al consultar el servidor.');
+                });
+        }
+    })();
+</script>
+</body>
+</html>
