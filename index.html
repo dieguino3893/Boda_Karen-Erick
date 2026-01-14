@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagina</title>
+    <title>Página de Boda</title>
     <link href="https://fonts.cdnfonts.com/css/miama" rel="stylesheet">
-    
     <link rel="stylesheet" href="./css/index.css">
 </head>
 
@@ -15,47 +13,43 @@
     <source src="./resources/Something.mp3" type="audio/mpeg">
 </audio>
 
-
-   <section class="hero">
-  <img class="hero-img" src="./img/principal.webp" alt="Imagen principal">
-  <div class="overlay-content">
-    <div class="countdown-container">
-      <div class="countdown-unit" id="days">00<span>Días</span></div>
-      <div class="countdown-unit" id="hours">00<span>Horas</span></div>
-      <div class="countdown-unit" id="minutes">00<span>Minutos</span></div>
-      <div class="countdown-unit" id="seconds">00<span>Segundos</span></div>
+<!-- HERO -->
+<section class="hero">
+    <img class="hero-img" src="./img/principal.webp" alt="Imagen principal">
+    <div class="overlay-content">
+        <div class="countdown-container">
+            <div class="countdown-unit" id="days">00<span>Días</span></div>
+            <div class="countdown-unit" id="hours">00<span>Horas</span></div>
+            <div class="countdown-unit" id="minutes">00<span>Minutos</span></div>
+            <div class="countdown-unit" id="seconds">00<span>Segundos</span></div>
+        </div>
+        <div class="name-overlay">
+            <span>Karen</span>
+            <span>&</span>
+            <span>Erick</span>
+        </div>
     </div>
-    <div class="name-overlay">
-      <span>Karen</span>
-      <span>&</span>
-      <span>Erick</span>
-    </div>
-  </div>
 </section>
-    <main>
+
+<main>
+    <!-- WEDDING SECTION -->
+    <div class="wedding-section">
+
+        <!-- Invitación -->
         <div class="box">
-            <h2 class="mainText">Estas invitado!</h2>
-            <p>Queremos que seas parte de este momento tan especial</p>
-            <div class="box-date">
-                <div class="date main-backgroundcolor">
-                    09
-                </div>
-                <div class="date main-backgroundcolor">
-                    0
-                </div>
-                <div class="date main-backgroundcolor">
-                    0
-                </div>
-                <div class="date main-backgroundcolor">
-                    0
-                </div>
+            <h2 class="mainText">¡Estás Invitado!</h2>
+            <p style="max-width: 600px; font-size: 1.1rem; line-height: 1.8;">Queremos que seas parte de este momento tan especial en nuestras vidas</p>
+            <div class="divider">
+                <span class="divider-icon">♦</span>
             </div>
         </div>
+
+        <!-- Detalles -->
         <div class="details">
             <div class="box">
-                <img src="./img/Anillo.png" alt="icono">
+                <img src="./img/Anillo.png" alt="Anillo">
                 <h2>CEREMONIA</h2>
-                <p>Iglesia Santisima Virgen</p>
+                <p>Iglesia Santísima Virgen</p>
                 <p>Te esperamos el</p>
                 <div class="date-celebration">
                     <div>
@@ -66,158 +60,97 @@
                     </div>
                 </div>
                 <p>Avenida Uno 19</p>
-                <p>Ciudad de lugar. Pais</p>
-    
-                <button class="ubication main-backgroundcolor" type="button">Ver Ubicación</button>
+                <p>Ciudad de lugar, País</p>
+                <button class="ubication" onclick="alert('Abrir Google Maps')">Ver Ubicación</button>
             </div>
             <div class="box">
-                <img src="./img/dresscode.jpg" alt="icono">
-                <h2>DRESSCODE</h2>
+                <img src="./img/dresscode.jpg" alt="Dress Code">
+                <h2>DRESS CODE</h2>
                 <p>Formal - No Niños</p>
-               
             </div>
+        </div>
 
-        </div>
-      <section id="galeria" class="main-backgroundcolor collage">
-        <div class="main-backgroundcolor collage" id="galeria">
-            <h2 class="mainText">NOSOTROS</h2>
-            <div class="container-img">
-                <div class="box-img">
-                    <a href="#">
-                        <figure>
-                            <img src="./img/image1.jpeg" alt="img-galeria">
-                        </figure>
-                    </a>
-                </div>
-                <div class="box-img">
-                    <a href="#">
-                        <figure>
-                            <img src="./img/image2.jpg" alt="img-galeria">
-                        </figure>
-                    </a>
-                </div>
-                <div class="box-img">
-                    <a href="#">
-                        <figure>
-                            <img src="./img/image3.webp" alt="img-galeria">
-                        </figure>
-                    </a>
-                </div>
-                <div class="box-img">
-                    <a href="#">
-                        <figure>
-                            <img src="./img/image4.jpg" alt="img-galeria">
-                        </figure>
-                    </a>
-                </div>
-                <div class="box-img">
-                    <a href="#">
-                        <figure>
-                            <img src="./img/image1.jpeg" alt="img-galeria">
-                        </figure>
-                    </a>
-                </div>
-                <div class="box-img">
-                    <a href="#">
-                        <figure>
-                            <img src="./img/img1.jpeg" alt="img-galeria">
-                        </figure>
-                    </a>
-                </div>
-                <div class="box-img">
-                    <a href="#">
-                        <figure>
-                            <img src="./img/image3.webp" alt="img-galeria">
-                        </figure>
-                    </a>
-                </div>
-                
+        <!-- Itinerario -->
+        <section id="itinerario">
+            <div class="header-itinerario">
+                <h1>El Gran Día</h1>
+                <p>NO TE PIERDAS NINGÚN MOMENTO</p>
             </div>
-           
-        </div>
+            <div class="linea-tiempo">
+                <div class="evento">
+                    <div class="detalle-evento">
+                        <p>CEREMONIA RELIGIOSA</p>
+                        <p>16:45 HRS</p>
+                    </div>
+                    <div class="icono-evento">
+                        <img src="./img/iglesia_icon.png" alt="Iglesia">
+                    </div>
+                </div>
+                <div class="evento">
+                    <div class="detalle-evento">
+                        <p>RECEPCIÓN</p>
+                        <p>18:45 HRS</p>
+                    </div>
+                    <div class="icono-evento">
+                        <img src="./img/recepcion_icon.png" alt="Recepción">
+                    </div>
+                </div>
+            </div>
         </section>
-        <!-- Sección Itinerario --> 
-        <!-- Sección Itinerario -->
-<section id="itinerario">
-  <div class="contenedor-principal">
-    <div class="itinerario">
-      <div class="header-itinerario">
-        <h1>El Gran Día</h1>
-        <p>NO TE PIERDAS NINGÚN MOMENTO</p>
-      </div>
 
-      <div class="linea-tiempo">
-        <div class="evento">
-          <div class="detalle-evento">
-            <p>CEREMONIA RELIGIOSA</p>
-            <p>16:45 HRS</p>
-          </div>
-          <div class="icono-evento">
-            <img src="./img/iglesia_icon.png" alt="Icono de la iglesia">
-          </div>
-        </div>
-
-        <div class="evento">
-          <div class="detalle-evento">
-            <p>RECEPCIÓN</p>
-            <p>18:45 HRS</p>
-          </div>
-          <div class="icono-evento">
-            <img src="./img/recepcion_icon.png" alt="Icono de campana">
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
-</section>
-<!-- Sección formulario de asistencia -->
-<section id="asistencia" class="box">
-<div class="box" id ="asistencia">
-    <h2>Confirma tu asistencia</h2>
-    <form id="rsvp-form">
-        <label for="name">Nombre completo:</label>
-        <input type="text" id="name" name="name" required>
 
-        <label for="attendance">¿Asistirás?</label>
-        <select id="attendance" name="attendance" required>
-            <option value="">Selecciona...</option>
-            <option value="si">Sí</option>
-            <option value="no">No</option>
-        </select>
-        <label id = "guests-text" for="guests">Número de acompañantes:</label>
-        <input type="number" id="guests" name="guests" min="0" max="6" value="0">
-        <button type="submit" class="main-backgroundcolor">Enviar</button>
-        <button id="download-qr" type="button" style="display: none;" class="main-backgroundcolor">Descargar QR</button>
-        <div id="qrcode-container" style="display: none;">
-    <div id="qrcode"></div>
-</div>
-        <div id="form-message"></div>
-    </form>
-    <div id="form-message"></div>
-</div>
-</section>
+    <!-- Sección Nosotros / Galería -->
+    <section id="galeria" class="collage">
+        <h2 class="mainText">Nosotros</h2>
+        <div class="container-img">
+            <div class="box-img"><img src="./img/invitacion.webp" alt="img-galeria"></div>
+            <div class="box-img"><img src="./img/invitacion_1.webp" alt="img-galeria"></div>
+            <div class="box-img"><img src="./img/invitacion_13.webp" alt="img-galeria"></div>
+            <div class="box-img"><img src="./img/invitacion_16.webp" alt="img-galeria"></div>
+            <div class="box-img"><img src="./img/invitacion_3.webp" alt="img-galeria"></div>
+            <div class="box-img"><img src="./img/invitacion_5.webp" alt="img-galeria"></div>
+            <div class="box-img"><img src="./img/invitacion_6.webp" alt="img-galeria"></div>
+        </div>
+    </section>
 
-        <!-- Sección regalos -->
-<section id="regalos" class="box">
-        <div class="box" id="regalos">
+    <!-- ASISTENCIA (SOLO LECTURA POR UUID) -->
+    <section id="asistencia" class="box">
+        <!-- JS inyecta aquí la tarjeta del invitado -->
+    </section>
+
+    <!-- Sección Regalos -->
+    <section id="regalos" class="box">
+        <div class="box">
             <img src="./img/regalo.jpg" alt="icono">
             <h2>REGALOS</h2>
-            <p>Lo mas importante es tu presencia, pero si deseas hacernos un regalo es bienvenido</p>
-           
+            <p>Lo más importante es tu presencia, pero si deseas hacernos un regalo es bienvenido</p>
         </div>
-</section>
-    </main>
-    <!-- menú de navegación fuera de itinerario -->
+    </section>
+</main>
+
+<!-- Panel de navegación -->
 <nav class="panel-navegacion">
-  <ul>
-    <li><a href="#galeria"><img src="./img/galeria.png" alt="Galeria"></a></li>
-    <li><a href="#itinerario"><img src="./img/itinerario.png" alt="itinerario"></a></li>
-    <li><a href="#asistencia"><img src="./img/entrada.png" alt="Asistencia"></a></li>
-    <li><a href="#regalos"><img src="./img/regalo_crono.png" alt="Regalos"></a></li>
-  </ul>
+    <ul>
+        <li><a href="#galeria"><img src="./img/galeria.png" alt="Galeria"></a></li>
+        <li><a href="#itinerario"><img src="./img/itinerario.png" alt="itinerario"></a></li>
+        <li><a href="#asistencia"><img src="./img/entrada.png" alt="Asistencia"></a></li>
+        <li><a href="#regalos"><img src="./img/regalo_crono.png" alt="Regalos"></a></li>
+    </ul>
 </nav>
-    <!-- QRCode.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <script src="./js/script.js"></script>
+
+<!-- Lightbox para galería -->
+<div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightbox-close">&times;</button>
+    <button class="lightbox-nav lightbox-prev" id="lightbox-prev">&#8249;</button>
+    <div class="lightbox-content">
+        <img id="lightbox-img" src="" alt="Imagen ampliada">
+    </div>
+    <button class="lightbox-nav lightbox-next" id="lightbox-next">&#8250;</button>
+</div>
+
+<!-- QR library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="./js/script.js"></script>
 </body>
 </html>
