@@ -3,14 +3,7 @@
 ========================================= */
 @import url('https://fonts.cdnfonts.com/css/miama');
 @import url('https://fonts.googleapis.com/css2?family=Alkatra:wght@700&family=Cairo:wght@600;1000&family=Montserrat:ital,wght@0,100;1,100&display=swap');
-
-/* =========================================
-   ANIMACIONES DE APARICIÓN
-========================================= */
-h1, h2, p, img, .box, .container-img {
-  opacity: 0;
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap');
 
 /* =========================================
    CONFIGURACIÓN GENERAL
@@ -27,10 +20,6 @@ body {
   margin: 0;
   padding: 0;
 }
-
-/* Paleta de colores reutilizable */
-.main-backgroundcolor { background-color: #B7AA92; }
-.main-fontcolor { color: #B7AA92; }
 
 /* =========================================
    ENCABEZADOS Y TEXTOS
@@ -57,8 +46,10 @@ p {
    SECCIÓN PRINCIPAL
 ========================================= */
 .mainText {
-  font-family: 'Miama', sans-serif;
-  font-size: 4rem;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  color: #B7AA92;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
 /* =========================================
@@ -75,6 +66,11 @@ p {
 .box img {
   width: 100px;
   margin-bottom: 10px;
+  transition: transform 0.3s ease;
+}
+
+.box img:hover {
+  transform: scale(1.1) rotate(5deg);
 }
 
 .date-celebration {
@@ -95,6 +91,7 @@ p {
   display: flex;
   align-items: center;
 }
+
 .hour span {
   font-size: 1rem;
 }
@@ -110,40 +107,108 @@ p {
   border: 1px solid #B7AA92;
   border-radius: 20px;
   cursor: pointer;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: all 0.3s ease;
 }
+
 .ubication:hover {
   background-color: #B7AA92;
   color: #fff;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(183, 170, 146, 0.3);
 }
 
 /* =========================================
    GALERÍA / COLLAGE
 ========================================= */
 .collage {
-  padding: 15px;
-  margin-bottom: 15px;
+  padding: 80px 20px;
+  background: #f7f3ed;
+}
+
+.collage .mainText {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: #B7AA92;
+  margin-bottom: 50px;
+  text-align: center;
+  letter-spacing: 2px;
+  font-weight: 400;
 }
 
 .container-img {
   width: 100%;
-  max-width: 1100px;
-  margin: 20px auto 10px;
+  max-width: 1200px;
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: 250px;
+  grid-template-rows: 300px;
   grid-gap: 20px;
+}
+
+.container-img .box-img {
+  position: relative;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+.container-img .box-img::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(183,170,146,0.3) 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.container-img .box-img::after {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  font-size: 3rem;
+  color: white;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  transition: transform 0.4s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.container-img .box-img:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(183, 170, 146, 0.4);
+}
+
+.container-img .box-img:hover::before {
+  opacity: 1;
+}
+
+.container-img .box-img:hover::after {
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .container-img .box-img img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.container-img .box-img:hover img {
+  transform: scale(1.1);
 }
 
 .container-img .box-img:nth-child(1) {
   grid-column-start: span 2;
 }
+
 .container-img .box-img:nth-child(4) {
   grid-row-start: span 2;
 }
@@ -174,28 +239,29 @@ p {
   object-position: center;
   animation: zoomIn 20s ease infinite alternate;
 }
+
 @keyframes zoomIn {
-    0% { transform: scale(1); }
-    100% { transform: scale(1.1); }
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
 }
 
 .overlay-content {
-    position: relative;
-    z-index: 3;
-    color: #fff;
-    text-align: center;
-    animation: fadeInUp 1.5s ease;
+  position: relative;
+  z-index: 3;
+  color: #fff;
+  text-align: center;
+  animation: fadeInUp 1.5s ease;
 }
 
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .countdown-container {
@@ -218,7 +284,7 @@ p {
 }
 
 .name-overlay {
-  font-family: 'Times New', Serief; /* Fuente de la pareja */
+  font-family: 'Times New', Serief;
   font-size: 7rem;
   font-weight: bold;
   line-height: 1.1;
@@ -282,296 +348,470 @@ p {
 .panel-navegacion .activo {
   background-color: #a0885e;
 }
+
 .panel-navegacion .activo img {
   filter: brightness(0) invert(1);
 }
+
 .panel-navegacion li:hover {
   background-color: rgba(160, 136, 94, 0.2);
 }
+
 .panel-navegacion .activo:hover {
   background-color: #8c734d;
 }
 
 /* =========================================
-   FORMULARIO RSVP
-========================================= */
-#rsvp-form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 90%;
-  max-width: 400px;
-  margin: auto;
-}
-
-#rsvp-form input,
-#rsvp-form select,
-#rsvp-form button {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 1rem;
-}
-
-#rsvp-form button {
-  background-color: #a0885e;
-  color: white;
-  cursor: pointer;
-  border: none;
-  transition: background-color 0.3s ease;
-}
-
-#rsvp-form button:hover {
-  background-color: #8c734d;
-}
-
-#form-message {
-  margin-top: 10px;
-  font-weight: bold;
-}
-
-/* Marco QR */
-#qrcode-container {
-  display: inline-block;
-  padding: 15px;
-  border: 5px solid #B7AA92;
-  border-radius: 12px;
-  background-color: #fff;
-}
-
-
-/* =========================================
    WEDDING SECTION
 ========================================= */
 .wedding-section {
-    font-family: 'Montserrat', sans-serif;
-    color: #4a4a4a;
-    padding: 20px 20px;
+  font-family: 'Montserrat', sans-serif;
+  color: #4a4a4a;
+  padding: 60px 20px;
+  background: linear-gradient(to bottom, #f7f3ed 0%, #ffffff 100%);
 }
 
-/* Invitación */
 .wedding-section .box {
-    padding: 10px 0px;
-    display: flex;
-    align-items: center;
-    flex-direction: column;
+  padding: 40px 20px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .wedding-section .mainText {
-    font-family: 'Miama', cursive;
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    margin-bottom: -20px;
-    text-align: center;
-    letter-spacing: 3px;
-  
-    /* --- Color dorado estático --- */
-    color: #867a52;
-
-    /* --- Sombra suave para resaltar --- */
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  margin-bottom: 20px;
+  text-align: center;
+  letter-spacing: 2px;
+  color: #B7AA92;
+  font-weight: 400;
 }
 
 .wedding-section .divider {
-    width: 100%;
-    text-align: center;
-    margin: 20px 0;
-    position: relative;
+  width: 100%;
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
 }
 
 .wedding-section .divider::before,
 .wedding-section .divider::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    width: 40%;
-    height: 1px;
-    background: linear-gradient(to right, transparent, #B7AA92, transparent);
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #B7AA92, transparent);
 }
 
 .wedding-section .divider::before { left: 0; }
 .wedding-section .divider::after { right: 0; }
 
 .wedding-section .divider-icon {
-    display: inline-block;
-    font-size: 2rem;
-    color: #D4AF37;
+  display: inline-block;
+  font-size: 2rem;
+  color: #D4AF37;
 }
 
-/* Detalles */
 .wedding-section .details {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 30px;
-    padding: 0px 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  padding: 0px 20px;
 }
 
 .wedding-section .details .box {
-    background: white;
-    border-radius: 20px;
-    padding: 40px 30px;
-    max-width: 400px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
+  background: white;
+  border-radius: 20px;
+  padding: 40px 30px;
+  max-width: 400px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
 }
 
 .wedding-section .details .box:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(183, 170, 146, 0.3);
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(183, 170, 146, 0.3);
 }
 
 .wedding-section .details .box img {
-    width: 100px;
-    height: 100px;
-    object-fit: contain;
-    margin-bottom: 20px;
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-bottom: 20px;
 }
 
 .wedding-section .details .box h2 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 2rem;
-    color: #B7AA92;
-    margin-bottom: 15px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  color: #B7AA92;
+  margin-bottom: 15px;
 }
 
-/* Date Celebration */
 .wedding-section .date-celebration {
-    display: flex;
-    margin: 20px 0;
-    gap: 20px;
+  display: flex;
+  margin: 20px 0;
+  gap: 20px;
 }
 
 .wedding-section .date-celebration > div:first-child {
-    border-right: 2px solid #B7AA92;
+  border-right: 2px solid #B7AA92;
 }
 
 .wedding-section .date-celebration p {
-    font-size: 1.8rem;
-    font-weight: 600;
-    color: #B7AA92;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #B7AA92;
 }
 
 .wedding-section .hour span {
-    font-size: 1rem;
+  font-size: 1rem;
 }
 
-/* Ubicación */
 .wedding-section .ubication {
-    width: 100%;
-    max-width: 300px;
-    font-size: 1rem;
-    padding: 15px 30px;
-    border: 2px solid #B7AA92;
-    border-radius: 25px;
-    background: white;
-    color: #B7AA92;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-weight: 600;
-    margin-top: 20px;
+  width: 100%;
+  max-width: 300px;
+  font-size: 1rem;
+  padding: 15px 30px;
+  border: 2px solid #B7AA92;
+  border-radius: 25px;
+  background: white;
+  color: #B7AA92;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  margin-top: 20px;
 }
 
 .wedding-section .ubication:hover {
-    background: linear-gradient(135deg, #B7AA92, #D4AF37);
-    color: white;
-    border-color: #D4AF37;
-    transform: scale(1.05);
-    box-shadow: 0 5px 15px rgba(183, 170, 146, 0.4);
+  background: linear-gradient(135deg, #B7AA92, #D4AF37);
+  color: white;
+  border-color: #D4AF37;
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(183, 170, 146, 0.4);
 }
 
-/* Itinerario */
 .wedding-section #itinerario {
-    padding: 80px 20px;
-    background: white;
+  padding: 80px 20px;
+  background: white;
 }
 
 .wedding-section .header-itinerario h1 {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    color: #B7AA92;
-    margin-bottom: 5px;
-    text-align: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  color: #B7AA92;
+  margin-bottom: 5px;
+  text-align: center;
 }
 
 .wedding-section .header-itinerario p {
-    font-size: 0.9rem;
-    color: #666;
-    letter-spacing: 3px;
-    text-align: center;
+  font-size: 0.9rem;
+  color: #666;
+  letter-spacing: 3px;
+  text-align: center;
 }
 
 .wedding-section .linea-tiempo {
-    position: relative;
-    padding: 60px 0;
-    max-width: 800px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  position: relative;
+  padding: 60px 0;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .wedding-section .linea-tiempo::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 0;
-    width: 2px;
-    height: 100%;
-    background: linear-gradient(to bottom, #B7AA92, #D4AF37);
-    transform: translateX(-50%);
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(to bottom, #B7AA92, #D4AF37);
+  transform: translateX(-50%);
 }
 
 .wedding-section .evento {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    width: 100%;
-    margin: 40px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  margin: 40px 0;
 }
 
 .wedding-section .detalle-evento {
-    position: absolute;
-    width: 40%;
-    right: 55%;
-    text-align: right;
-    padding: 20px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  position: absolute;
+  width: 40%;
+  right: 55%;
+  text-align: right;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.wedding-section .detalle-evento:hover {
+  transform: translateX(-10px);
+  box-shadow: 0 10px 25px rgba(183, 170, 146, 0.3);
 }
 
 .wedding-section .detalle-evento p:first-child {
-    font-weight: 600;
-    color: #B7AA92;
-    font-size: 1.1rem;
-    margin-bottom: 5px;
+  font-weight: 600;
+  color: #B7AA92;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
 }
 
 .wedding-section .detalle-evento p:last-child {
-    font-size: 0.9rem;
-    color: #666;
+  font-size: 0.9rem;
+  color: #666;
 }
 
 .wedding-section .icono-evento {
-    width: 80px;
-    height: 80px;
-    background: linear-gradient(135deg, #B7AA92, #D4AF37);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 10;
-    box-shadow: 0 5px 20px rgba(183, 170, 146, 0.4);
-    position: relative;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, #B7AA92, #D4AF37);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  box-shadow: 0 5px 20px rgba(183, 170, 146, 0.4);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.wedding-section .icono-evento:hover {
+  transform: scale(1.1) rotate(10deg);
+  box-shadow: 0 8px 30px rgba(183, 170, 146, 0.6);
 }
 
 .wedding-section .icono-evento img {
-    width: 40px;
-    height: 40px;
+  width: 40px;
+  height: 40px;
 }
 
+/* =========================================
+   EL QR DEL INVITADO
+========================================= */
+.invite-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 80px 1rem;
+  background: linear-gradient(135deg, #f7f3ed 0%, #ffffff 100%);
+}
+
+.invite-card {
+  width: 420px;
+  max-width: 92vw;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(183, 170, 146, 0.2);
+  padding: 50px 30px;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  color: #111;
+  border: 1px solid rgba(183, 170, 146, 0.2);
+  transition: all 0.3s ease;
+}
+
+.invite-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 25px 70px rgba(183, 170, 146, 0.3);
+}
+
+.invite-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  line-height: 1.2;
+  color: #B7AA92;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.invite-sub {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 30px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.qr-box {
+  margin: 30px auto;
+  width: 240px;
+  height: 240px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 15px;
+  padding: 15px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+}
+
+#qrcode {
+  width: 210px;
+  height: 210px;
+  background: #ffffff;
+  display: block;
+}
+
+#qrcode canvas,
+#qrcode img,
+#qrcode table {
+  width: 210px !important;
+  height: 210px !important;
+  display: block;
+  margin: 0 auto;
+  background: #ffffff;
+}
+
+.guest-name {
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-top: 25px;
+  color: #333;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.guest-info {
+  font-size: 0.95rem;
+  color: #666;
+  margin-top: 15px;
+  line-height: 1.6;
+}
+
+.guest-link {
+  font-size: 0.75rem;
+  color: #999;
+  margin-top: 15px;
+  word-break: break-all;
+  padding: 0 20px;
+}
+
+/* Forzar visibilidad del QR */
+#asistencia,
+#asistencia .invite-wrapper,
+#asistencia .invite-card,
+#asistencia .invite-title,
+#asistencia .invite-sub,
+#asistencia .qr-box,
+#asistencia #qrcode {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* =========================================
+   LIGHTBOX GALERÍA
+========================================= */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lightbox.active {
+  display: flex;
+  opacity: 1;
+}
+
+.lightbox-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90vh;
+  animation: lightboxZoom 0.3s ease;
+}
+
+.lightbox-content img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 10px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: -50px;
+  right: 0;
+  font-size: 40px;
+  color: #fff;
+  cursor: pointer;
+  background: rgba(183, 170, 146, 0.3);
+  border: none;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  border-radius: 50%;
+}
+
+.lightbox-close:hover {
+  transform: scale(1.2);
+  background: rgba(183, 170, 146, 0.6);
+}
+
+.lightbox-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 50px;
+  color: #fff;
+  cursor: pointer;
+  background: rgba(183, 170, 146, 0.3);
+  border: none;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.lightbox-nav:hover {
+  background: rgba(183, 170, 146, 0.6);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.lightbox-prev {
+  left: 20px;
+}
+
+.lightbox-next {
+  right: 20px;
+}
+
+@keyframes lightboxZoom {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 
 /* =========================================
    RESPONSIVE DESIGN
@@ -586,33 +826,329 @@ p {
   }
 }
 
-@media only screen and (min-width: 800px) {
-  .mainImage {
-    height: 600px;
+@media only screen and (max-width: 1024px) {
+  .name-overlay {
+    font-size: 5rem;
   }
-  .mainImage img {
-    height: 100%;
+  
+  .countdown-unit {
+    font-size: 2rem;
   }
 }
 
 @media screen and (max-width: 800px) {
+  /* Hero */
+  .name-overlay {
+    font-size: 4rem;
+  }
+  
+  .countdown-container {
+    gap: 10px;
+  }
+  
+  .countdown-unit {
+    font-size: 1.8rem;
+  }
+  
+  .countdown-unit span {
+    font-size: 0.75rem;
+  }
+  
+  /* Galería */
   .container-img {
     width: 95%;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 10px;
-    grid-template-rows: 200px;
+    grid-gap: 15px;
+    grid-template-rows: 250px;
   }
+  
   .container-img .box-img:nth-child(1) {
     grid-column-start: span 1;
   }
+  
+  .container-img .box-img:nth-child(4) {
+    grid-row-start: span 1;
+  }
+  
+  .collage {
+    padding: 60px 20px;
+  }
+  
+  /* Wedding Section */
+  .wedding-section {
+    padding: 40px 15px;
+  }
+  
+  .wedding-section .details {
+    gap: 20px;
+  }
+  
+  .wedding-section .details .box {
+    padding: 30px 20px;
+  }
+  
+  /* Itinerario */
+  .wedding-section #itinerario {
+    padding: 60px 15px;
+  }
+  
+  .wedding-section .detalle-evento {
+    width: 45%;
+    right: 52%;
+    padding: 15px;
+    font-size: 0.9rem;
+  }
+  
+  .wedding-section .icono-evento {
+    width: 70px;
+    height: 70px;
+  }
+  
+  .wedding-section .icono-evento img {
+    width: 35px;
+    height: 35px;
+  }
+  
+  /* Panel navegación */
+  .panel-navegacion {
+    right: 10px;
+  }
+  
+  .panel-navegacion li {
+    width: 45px;
+    height: 45px;
+  }
+  
+  .panel-navegacion li img {
+    width: 22px;
+    height: 22px;
+  }
+  
+  /* Lightbox */
+  .lightbox-content {
+    max-width: 95%;
+    max-height: 85vh;
+  }
+  
+  .lightbox-nav {
+    width: 50px;
+    height: 50px;
+    font-size: 35px;
+  }
+  
+  .lightbox-prev {
+    left: 10px;
+  }
+  
+  .lightbox-next {
+    right: 10px;
+  }
+  
+  .lightbox-close {
+    top: 10px;
+    right: 10px;
+    font-size: 35px;
+    width: 45px;
+    height: 45px;
+  }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
+  /* Hero */
+  .name-overlay {
+    font-size: 3rem;
+    padding: 0 15px;
+  }
+  
+  .countdown-container {
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  
+  .countdown-unit {
+    font-size: 1.5rem;
+  }
+  
+  .countdown-unit span {
+    font-size: 0.7rem;
+  }
+  
+  /* Textos principales */
+  .collage .mainText,
+  .wedding-section .mainText {
+    font-size: 2rem;
+  }
+  
+  /* Galería */
   .container-img {
     width: 90%;
     grid-template-columns: 1fr;
+    grid-gap: 15px;
+    grid-template-rows: 250px;
   }
-  .container-img .box-img img {
+  
+  .container-img .box-img {
+    border-radius: 10px;
+  }
+  
+  .container-img .box-img::after {
+    font-size: 2.5rem;
+  }
+  
+  /* Wedding Section */
+  .wedding-section {
+    padding: 40px 15px;
+  }
+  
+  .wedding-section .box {
+    padding: 30px 15px;
+  }
+  
+  .wedding-section .details .box {
+    max-width: 100%;
+    padding: 30px 20px;
+  }
+  
+  .wedding-section .date-celebration {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .wedding-section .date-celebration > div {
+    width: 100%;
+  }
+  
+  .wedding-section .date-celebration > div:first-child {
+    border-right: none;
+    border-bottom: 2px solid #B7AA92;
+    padding-bottom: 10px;
+  }
+  
+  /* Itinerario */
+  .wedding-section #itinerario {
+    padding: 50px 15px;
+  }
+  
+  .wedding-section .linea-tiempo {
+    padding: 40px 0;
+  }
+  
+  .wedding-section .evento {
+    margin: 30px 0;
+  }
+  
+  .wedding-section .detalle-evento {
+    position: static;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  
+  .wedding-section .linea-tiempo::before {
+    display: none;
+  }
+  
+  .wedding-section .icono-evento {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .wedding-section .icono-evento img {
+    width: 30px;
+    height: 30px;
+  }
+  
+  /* QR Card */
+  .invite-wrapper {
+    padding: 60px 1rem;
+  }
+  
+  .invite-card {
+    padding: 40px 25px;
+  }
+  
+  .invite-title {
+    font-size: 2rem;
+  }
+  
+  .qr-box {
+    width: 200px;
     height: 200px;
+  }
+  
+  #qrcode,
+  #qrcode canvas,
+  #qrcode img,
+  #qrcode table {
+    width: 180px !important;
+    height: 180px !important;
+  }
+  
+  /* Panel navegación */
+  .panel-navegacion {
+    right: 5px;
+    border-radius: 40px;
+  }
+  
+  .panel-navegacion ul {
+    padding: 8px 3px;
+    gap: 8px;
+  }
+  
+  .panel-navegacion li {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .panel-navegacion li img {
+    width: 20px;
+    height: 20px;
+  }
+  
+  /* Lightbox */
+  .lightbox-content {
+    max-width: 98%;
+    max-height: 80vh;
+  }
+  
+  .lightbox-nav {
+    width: 45px;
+    height: 45px;
+    font-size: 30px;
+  }
+  
+  .lightbox-prev {
+    left: 5px;
+  }
+  
+  .lightbox-next {
+    right: 5px;
+  }
+  
+  .lightbox-close {
+    top: 10px;
+    right: 10px;
+    font-size: 30px;
+    width: 40px;
+    height: 40px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .name-overlay {
+    font-size: 2.5rem;
+  }
+  
+  .countdown-unit {
+    font-size: 1.3rem;
+  }
+  
+  .wedding-section .mainText,
+  .collage .mainText {
+    font-size: 1.8rem;
+  }
+  
+  .container-img {
+    grid-template-rows: 220px;
   }
 }

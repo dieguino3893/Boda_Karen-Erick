@@ -1,5 +1,5 @@
   let toast;
-        const ruta = "http://localhost:5114/asistencia"
+        const ruta = "https://netasistencia-bbckcda7hbhpdtgd.eastus-01.azurewebsites.net/asistencia"
         async function cargarInvitados() {
             const res = await fetch(ruta);
             const invitados = await res.json();
