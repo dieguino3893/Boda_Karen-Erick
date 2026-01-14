@@ -59,7 +59,7 @@
             if (!uuid) return alert('UUID no disponible');
             const origin = window.location.origin || (window.location.protocol + '//' + window.location.host);
             // Usar query param 'datos' para evitar problemas con servidores que tratan segmentos como rutas físicas
-            const link = `${origin}/test.html?datos=${encodeURIComponent(uuid)}`;
+            const link = `${origin}/?datos=${encodeURIComponent(uuid)}`;
             navigator.clipboard.writeText(link).then(() => {
                 if (!toast) {
                     toast = new bootstrap.Toast(document.getElementById('alert-toast'), { delay: 2000 });
