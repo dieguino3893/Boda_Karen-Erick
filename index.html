@@ -49,19 +49,28 @@
             <div class="box">
                 <img src="./img/Anillo.png" alt="Anillo">
                 <h2>CEREMONIA</h2>
-                <p>Iglesia Santísima Virgen</p>
+                <p>Templo de San Judas Tadeo</p>
                 <p>Te esperamos el</p>
                 <div class="date-celebration">
                     <div>
-                        <p>27 SEP</p>
+                        <p>25 ABRIL</p>
                     </div>
                     <div>
-                        <p class="hour">19:00 <span>P.M</span></p>
+                        <p class="hour">04:00 <span>P.M</span></p>
                     </div>
                 </div>
-                <p>Avenida Uno 19</p>
-                <p>Ciudad de lugar, País</p>
-                <button class="ubication" onclick="alert('Abrir Google Maps')">Ver Ubicación</button>
+                <p>Av Roma s/n, Andrade, 37020</p>
+                <p>León de los Aldama, Gto.</p>
+                <button class="ubication" onclick="window.open('https://maps.app.goo.gl/PWKhsHoDwkVEwJp48')">Ver Ubicación</button>
+            </div>
+            <div class="box">
+                <img src="./img/Anillo.png" alt="Anillo">
+                <h2>RECEPCIÓN</h2>
+                <p>Hacienda Arrayán</p>
+               
+                <p>Av. Cdad. Asís 103, Fracciones de Sangre de Cristo, 37545</p>
+                <p>León de los Aldama, Gto.</p>
+                <button class="ubication" onclick="window.open('https://maps.app.goo.gl/o7ZjXZwzvQE41Thk6')">Ver Ubicación</button>
             </div>
             <div class="box">
                 <img src="./img/dresscode.jpg" alt="Dress Code">
@@ -120,20 +129,86 @@
     </section>
 
     <!-- Sección Regalos -->
-    <section id="regalos" class="box">
-        <div class="box">
-            <img src="./img/regalo.jpg" alt="icono">
-            <h2>REGALOS</h2>
-            <p>Lo más importante es tu presencia, pero si deseas hacernos un regalo es bienvenido</p>
+    <section id="regalos" class="regalos-section">
+        <div class="regalos-container">
+            <h2 class="mainText">Mesa de Regalos</h2>
+            <div class="divider">
+                <span class="divider-icon">♦</span>
+            </div>
+            <p class="regalos-mensaje">Lo más importante es tu presencia, pero si deseas hacernos un regalo es bienvenido</p>
+            
+            <div class="regalos-opciones">
+                <!-- Opción Amazon -->
+                <div class="regalo-card">
+                    <div class="regalo-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M13.582 10.002c-.563 0-1.196-.035-1.759-.14-.563-.07-.985-.176-1.336-.282v4.368c0 .915.07 1.547.21 1.971.14.423.352.704.634.88.282.177.633.247 1.054.247.563 0 1.055-.212 1.477-.634.422-.423.633-.985.633-1.688v-.352h1.898v.352c0 1.196-.387 2.157-1.16 2.883-.774.727-1.794 1.09-3.06 1.09-1.266 0-2.286-.363-3.06-1.09-.773-.726-1.16-1.687-1.16-2.883v-4.298c0-1.196.387-2.157 1.16-2.883.774-.727 1.794-1.09 3.06-1.09 1.266 0 2.286.363 3.06 1.09.773.726 1.16 1.687 1.16 2.883v.422H13.582v-.422c0-.774-.211-1.336-.633-1.688-.422-.352-.915-.528-1.477-.528zM8.85 4.298c0-.704.247-1.266.74-1.687.492-.422 1.09-.633 1.793-.633.704 0 1.301.211 1.794.633.492.421.739.983.739 1.687v.563c0 .704-.247 1.265-.74 1.687-.492.422-1.09.633-1.793.633-.704 0-1.301-.211-1.794-.633-.492-.422-.739-.983-.739-1.687v-.563zm0 12.003v-.563c0-.704.247-1.265.74-1.687.492-.422 1.09-.633 1.793-.633.704 0 1.301.211 1.794.633.492.422.739.983.739 1.687v.563c0 .704-.247 1.265-.74 1.687-.492.422-1.09.633-1.793.633-.704 0-1.301-.211-1.794-.633-.492-.422-.739-.983-.739-1.687z"/>
+                        </svg>
+                    </div>
+                    <h3>Amazon</h3>
+                    <p>Encuentra nuestra lista de deseos</p>
+                    <a href="https://www.amazon.com.mx/wedding/registry/O0MEHGVI84HA" target="_blank" class="regalo-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/>
+                        </svg>
+                        Ver Wishlist
+                    </a>
+                </div>
+
+                <!-- Opción Transferencia -->
+                <div class="regalo-card">
+                    <div class="regalo-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                        </svg>
+                    </div>
+                    <h3>Transferencia</h3>
+                    <p>Lluvia de sobres</p>
+                    <button class="regalo-btn" onclick="document.getElementById('cuenta-modal').style.display='flex'">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"/>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>
+                        </svg>
+                        Ver Datos
+                    </button>
+                </div>
+            </div>
         </div>
     </section>
+
+    <!-- Modal para datos bancarios -->
+    <div id="cuenta-modal" class="modal-overlay" onclick="if(event.target === this) this.style.display='none'">
+        <div class="modal-content">
+            <button class="modal-close" onclick="document.getElementById('cuenta-modal').style.display='none'">&times;</button>
+            <h3>Datos de Transferencia</h3>
+            <div class="cuenta-info">
+                <div class="info-item">
+                    <span class="info-label">Banco:</span>
+                    <span class="info-value">BBVA Bancomer</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Nombre:</span>
+                    <span class="info-value">Karen & Erick</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">CLABE:</span>
+                    <span class="info-value">012 225 01597756693 0</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Tarjeta:</span>
+                    <span class="info-value">159 775 6693</span>
+                </div>
+            </div>
+            <p class="modal-note">Tu comision es mas que recibida</p>
+        </div>
+    </div>
 </main>
 
 <!-- Panel de navegación -->
 <nav class="panel-navegacion">
     <ul>
-        <li><a href="#galeria"><img src="./img/galeria.png" alt="Galeria"></a></li>
         <li><a href="#itinerario"><img src="./img/itinerario.png" alt="itinerario"></a></li>
+        <li><a href="#galeria"><img src="./img/galeria.png" alt="Galeria"></a></li>
         <li><a href="#asistencia"><img src="./img/entrada.png" alt="Asistencia"></a></li>
         <li><a href="#regalos"><img src="./img/regalo_crono.png" alt="Regalos"></a></li>
     </ul>

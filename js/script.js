@@ -25,17 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
         observer.observe(el);
     });
 
-    /* ---------- 2. BOTÓN UBICACIÓN ---------- */
-    const button = document.querySelector(".ubication");
-    if (button) {
-        setInterval(() => {
-            button.animate([
-                { transform: "scale(1)", backgroundColor: "#B7AA92" },
-                { transform: "scale(1.1)", backgroundColor: "#a49780" },
-                { transform: "scale(1)", backgroundColor: "#B7AA92" }
-            ], { duration: 800 });
-        }, 1500);
-    }
 
     /* ---------- 3. MÚSICA ---------- */
     const music = document.getElementById("bg-music");
@@ -46,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /* ---------- 4. COUNTDOWN ---------- */
-    const weddingDate = new Date("2025-09-27T19:00:00");
+    const weddingDate = new Date("2026-04-25T04:00:00");
 
     function updateOverlayCountdown() {
         const diff = weddingDate - new Date();
@@ -163,8 +152,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.key === 'ArrowLeft') showPrevImage();
         if (e.key === 'ArrowRight') showNextImage();
     });
-
-    /* ---------- 7. UUID + QR ---------- */
+/* ---------- 7. UUID + QR ---------- */
     const uuid = new URLSearchParams(location.search).get("datos");
     if (!uuid) return;
 
@@ -172,33 +160,186 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(res => res.ok ? res.json() : Promise.reject())
         .then(inv => {
             const section = document.getElementById("asistencia");
+            
+            // Si confirmó que NO asistirá
+            if (inv.asistencia === false) {
+                section.innerHTML = `
+                    <div class="invite-wrapper">
+                        <div class="invite-card">
+                            <div class="invite-title">Tu Invitación</div>
+                            <div style="text-align: center; padding: 40px 20px;">
+                                <div style="font-size: 60px; margin-bottom: 20px;">😔</div>
+                                <div style="font-size: 24px; color: #666; margin-bottom: 10px;">
+                                    Lamentamos que no puedas asistir
+                                </div>
+                                <div class="guest-name">${inv.nombre}</div>
+                                <div style="color: #999; margin-top: 20px;">
+                                    Esperamos verte en una próxima ocasión
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Si ya confirmó que SÍ asistirá o está pendiente
             section.innerHTML = `
                 <div class="invite-wrapper">
                     <div class="invite-card">
                         <div class="invite-title">Tu Invitación</div>
                         <div class="invite-sub">PRESENTA ESTE CÓDIGO</div>
                         <div class="qr-box">
-                            <div id="qrcode"></div>
+                            <div id="qrcode" style="position: relative;"></div>
                         </div>
                         <div class="guest-name">${inv.nombre}</div>
                         <div class="guest-info">
-                          Confirmación: ${inv.asistencia ? "✓ Confirmado" : "Pendiente"}<br>
+                          Confirmación: ${inv.asistencia === true ? "✓ Confirmado" : "Pendiente"}<br>
                           Acompañantes: ${inv.invitados} ${inv.invitados === 1 ? 'persona' : 'personas'}
                         </div>
+                        ${inv.asistencia !== true ? `
+                        <div style="margin-top: 20px;">
+                            <button id="btnConfirmar" style="
+                                background: #86674a;
+                                color: white;
+                                border: none;
+                                padding: 12px 30px;
+                                font-size: 16px;
+                                border-radius: 8px;
+                                box-shadow: 0 0 5px #e6dfd8;
+                                cursor: pointer;
+                                transition: background 0.3s;
+                                margin-right: 10px;
+                            ">Asistiré</button>
+                            <button id="btnDeclinar" style="
+                                background: #ffffff;
+                                color: #86674a;
+                                border: none;
+                                padding: 12px 30px;
+                                font-size: 16px;
+                                border-radius: 8px;
+                                box-shadow: 0 0 5px #e6dfd8;
+                                cursor: pointer;
+                                transition: background 0.3s;
+                            ">No Asistiré</button>
+                            <div id="mensajeConfirmacion" style="margin-top: 10px;"></div>
+                        </div>
+                        ` : ''}
                     </div>
                 </div>
             `;
 
-            new QRCode(document.getElementById("qrcode"), {
-                text: uuid,
-                width: 210,
-                height: 210,
-                correctLevel: QRCode.CorrectLevel.H
-            });
+            // Generar QR code
+            const qrcodeDiv = document.getElementById("qrcode");
+            
+            if (inv.asistencia === true) {
+                // QR real con UUID
+                new QRCode(qrcodeDiv, {
+                    text: uuid,
+                    width: 200,
+                    height: 200
+                });
+            } else {
+                // QR estático con signo de interrogación
+                new QRCode(qrcodeDiv, {
+                    text: "PENDIENTE",
+                    width: 200,
+                    height: 200,
+                    colorDark: "#cccccc",
+                    colorLight: "#ffffff"
+                });
+                
+                // Agregar signo de interrogación en el centro
+                setTimeout(() => {
+                    const questionMark = document.createElement("div");
+                    questionMark.innerHTML = "×";
+                    questionMark.style.cssText = `
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        font-size: 80px;
+                        font-weight: bold;
+                        color: #999;
+                        background: white;
+                        width: 60px;
+                        height: 60px;
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                    `;
+                    qrcodeDiv.appendChild(questionMark);
+                }, 100);
+            }
+
+            // Agregar eventos de confirmación DESPUÉS de insertar el HTML
+            if (inv.asistencia !== true && inv.asistencia !== false) {
+                // Esperar un momento para que el DOM se actualice
+                setTimeout(() => {
+                    const btnConfirmar = document.getElementById("btnConfirmar");
+                    const btnDeclinar = document.getElementById("btnDeclinar");
+                    const mensajeConfirmacion = document.getElementById("mensajeConfirmacion");
+
+                    // Función para actualizar asistencia
+                    const actualizarAsistencia = (asistira) => {
+                        btnConfirmar.disabled = true;
+                        btnDeclinar.disabled = true;
+                        mensajeConfirmacion.textContent = "Procesando...";
+                        mensajeConfirmacion.style.color = "#666";
+
+                        fetch("https://netasistencia-bbckcda7hbhpdtgd.eastus-01.azurewebsites.net/asistencia/actualizar", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify({
+                                uuid: uuid,
+                                asistencia: asistira
+                            })
+                        })
+                        .then(res => res.ok ? res.json() : Promise.reject())
+                        .then(() => {
+                            if (asistira) {
+                                mensajeConfirmacion.style.color = "#4CAF50";
+                                mensajeConfirmacion.textContent = "✓ ¡Asistencia confirmada exitosamente!";
+                                
+                                // Actualizar UI para mostrar QR
+                                setTimeout(() => {
+                                    location.reload();
+                                }, 1500);
+                            } else {
+                                // Recargar para mostrar mensaje de no asistencia
+                                location.reload();
+                            }
+                        })
+                        .catch(() => {
+                            mensajeConfirmacion.style.color = "#f44336";
+                            mensajeConfirmacion.textContent = "Error al procesar. Intenta de nuevo.";
+                            btnConfirmar.disabled = false;
+                            btnDeclinar.disabled = false;
+                        });
+                    };
+
+                    btnConfirmar.addEventListener("click", () => actualizarAsistencia(true));
+                    btnDeclinar.addEventListener("click", () => {
+                        if (confirm("¿Estás seguro que no podrás asistir?")) {
+                            actualizarAsistencia(false);
+                        }
+                    });
+                }, 0);
+            }
         })
         .catch(() => {
-            document.getElementById("asistencia").innerHTML =
-                "<p style='text-align:center; color:#B7AA92; font-size:1.2rem; padding:60px 20px;'>Invitación no encontrada</p>";
+            document.getElementById("asistencia").innerHTML = `
+                <div class="invite-wrapper">
+                    <div class="invite-card">
+                        <div style="color: #f44336; text-align: center;">
+                            Error al cargar la invitación
+                        </div>
+                    </div>
+                </div>
+            `;
         });
-
 });

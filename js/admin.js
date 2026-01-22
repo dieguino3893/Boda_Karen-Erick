@@ -11,7 +11,7 @@
                 tr.innerHTML = `
                     <td>${index + 1}</td>
                     <td>${inv.nombre}</td>
-                    <td>${inv.asistencia ? "Sí" : "No"}</td>
+                    <td>${inv.asistencia === null ? "No confirmado" : inv.asistencia ? "Sí" : "No"} </td>
                     <td>${inv.invitados}</td>
                     <td>
                         <input type="text" id="mesa-${inv.id}" class="form-control form-control-sm" value="${inv.mesa || ''}" placeholder="Mesa">
@@ -76,10 +76,9 @@
         async function agregarInvitado() {
             const nombre = document.getElementById('nuevo-nombre').value.trim();
             const invitadosNum = Number(document.getElementById('nuevo-invitados').value || 0);
-            const asistenciaVal = document.getElementById('nuevo-asistencia').value === 'true';
             if (!nombre) return alert('Nombre es requerido');
 
-            const payload = { nombre: nombre, asistencia: asistenciaVal, invitados: invitadosNum };
+            const payload = { nombre: nombre, invitados: invitadosNum };
             const res = await fetch(ruta, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
