@@ -18,11 +18,7 @@
     </nav>
 
     <div class="container my-4">
-        <!-- Buscador -->
-        <div class="input-group mb-3">
-            <input type="text" id="search-name" class="form-control" placeholder="Buscar por nombre..." onkeyup="filtrarTabla()">
-            <button class="btn btn-outline-secondary" onclick="filtrarTabla()">Buscar</button>
-        </div>
+    
 
         <!-- Formulario para agregar invitados -->
         <div class="card mb-3">
@@ -54,6 +50,24 @@
             <div class="card-header bg-light">
                 <h5>Lista de Invitados</h5>
             </div>
+            <div class="row g-2 mb-3">
+    <div class="col-md-4">
+        <input type="text" id="search-name" class="form-control" placeholder="Buscar por nombre..." onkeyup="filtrarTabla()"">
+    </div>
+    
+    <div class="col-md-4">
+        <select id="filter-asistencia" class="form-select" onchange="aplicarFiltros()">
+            <option value="todos">Todas las asistencias</option>
+            <option value="confirmados">Confirmados (Sí)</option>
+            <option value="pendientes">Pendientes (No confirmado)</option>
+            <option value="rechazados">No asistirán (No)</option>
+        </select>
+    </div>
+
+    <div class="col-md-4">
+        <input type="text" id="filter-mesa" class="form-control" placeholder="Filtrar por mesa..." onkeyup="aplicarFiltros()">
+    </div>
+</div>
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-bordered align-middle" id="invitados-table">

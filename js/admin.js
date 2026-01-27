@@ -1,33 +1,69 @@
-  let toast;
-        const ruta = "https://netasistencia-bbckcda7hbhpdtgd.eastus-01.azurewebsites.net/asistencia"
-        async function cargarInvitados() {
-            const res = await fetch(ruta);
-            const invitados = await res.json();
-            const tbody = document.getElementById("invitados-tbody");
-            tbody.innerHTML = "";
+let toast;
+let listaInvitados = []; // Variable global para guardar los datos del fetch
+const ruta = "https://netasistencia-bbckcda7hbhpdtgd.eastus-01.azurewebsites.net/asistencia";
 
-            invitados.forEach((inv, index) => {
-                const tr = document.createElement("tr");
-                tr.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td>${inv.nombre}</td>
-                    <td>${inv.asistencia === null ? "No confirmado" : inv.asistencia ? "Sí" : "No"} </td>
-                    <td>${inv.invitados}</td>
-                    <td>
-                        <input type="text" id="mesa-${inv.id}" class="form-control form-control-sm" value="${inv.mesa || ''}" placeholder="Mesa">
-                    </td>
-                    <td>${inv.fecha_registro ? new Date(inv.fecha_registro).toLocaleString() : ''}</td>
-                    <td>
-                        <div class="btn-group" role="group">
-                          <button class="btn btn-success btn-sm" onclick="asignarMesa('${inv.id}')">Asignar</button>
-                          <button class="btn btn-secondary btn-sm" onclick="copiarEnlace('${inv.uuid}')">Copiar enlace</button>
-                          <button class="btn btn-danger btn-sm" onclick="eliminarInvitado('${inv.id}')">Eliminar</button>
-                        </div>
-                    </td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
+async function cargarInvitados() {
+    try {
+        const res = await fetch(ruta);
+        listaInvitados = await res.json(); // Guardamos los datos
+        renderizarTabla(listaInvitados);  // Dibujamos la tabla original
+    } catch (error) {
+        console.error("Error cargando invitados:", error);
+    }
+}
+
+// Nueva función que separa la lógica de "dibujar" de la de "cargar"
+function renderizarTabla(datos) {
+    const tbody = document.getElementById("invitados-tbody");
+    tbody.innerHTML = "";
+
+    datos.forEach((inv, index) => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${inv.nombre}</td>
+            <td>${inv.asistencia === null ? "No confirmado" : inv.asistencia ? "Sí" : "No"} </td>
+            <td>${inv.invitados}</td>
+            <td>
+                <input type="text" id="mesa-${inv.id}" class="form-control form-control-sm" value="${inv.mesa || ''}" placeholder="Mesa">
+            </td>
+            <td>${inv.fecha_registro ? new Date(inv.fecha_registro).toLocaleString() : ''}</td>
+            <td>
+                <div class="btn-group" role="group">
+                  <button class="btn btn-success btn-sm" onclick="asignarMesa('${inv.id}')">Asignar</button>
+                  <button class="btn btn-secondary btn-sm" onclick="copiarEnlace('${inv.uuid}')">Copiar</button>
+                  <button class="btn btn-danger btn-sm" onclick="eliminarInvitado('${inv.id}')">Eliminar</button>
+                </div>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+// Esta es la función mágica que combina los 3 filtros
+function aplicarFiltros() {
+    const busquedaNombre = document.getElementById("search-name").value.toLowerCase();
+    const filtroAsistencia = document.getElementById("filter-asistencia").value;
+    const busquedaMesa = document.getElementById("filter-mesa").value.toLowerCase();
+
+    const invitadosFiltrados = listaInvitados.filter(inv => {
+        // 1. Filtro Nombre
+        const cumpleNombre = inv.nombre.toLowerCase().includes(busquedaNombre);
+
+        // 2. Filtro Mesa
+        const cumpleMesa = (inv.mesa || "").toString().toLowerCase().includes(busquedaMesa);
+
+        // 3. Filtro Asistencia
+        let cumpleAsistencia = true;
+        if (filtroAsistencia === "confirmados") cumpleAsistencia = inv.asistencia === true;
+        if (filtroAsistencia === "pendientes") cumpleAsistencia = inv.asistencia === null;
+        if (filtroAsistencia === "rechazados") cumpleAsistencia = inv.asistencia === false;
+
+        return cumpleNombre && cumpleMesa && cumpleAsistencia;
+    });
+
+    renderizarTabla(invitadosFiltrados);
+}
 
         async function asignarMesa(id) {
             const mesa = document.getElementById(`mesa-${id}`).value;
