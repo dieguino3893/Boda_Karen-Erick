@@ -15,8 +15,8 @@
 }
 
 body {
-  font-family: 'Times New Roman';
-  background-color: #fdf8d4;
+  font-family: 'Times New Roman', Times, serif;
+  background-color: #f7f3ed;
   margin: 0;
   padding: 0;
 }
@@ -48,7 +48,7 @@ p {
 .mainText {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(2.5rem, 6vw, 5rem);
-  color: #486547;
+  color: #B7AA92;
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
 }
 
@@ -106,13 +106,13 @@ p {
 ========================================= */
 .collage {
   padding: 80px 20px;
-  background: #fdf8d4;
+  background: #f7f3ed;
 }
 
 .collage .mainText {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(2.5rem, 5vw, 4rem);
-  color: #486547;
+  color: #B7AA92;
   margin-bottom: 50px;  
   text-align: center;
   letter-spacing: 2px;
@@ -145,7 +145,7 @@ p {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(72,101,71,0.3) 100%);
+  background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(183,170,146,0.3) 100%);
   opacity: 0;
   transition: opacity 0.4s ease;
   z-index: 1;
@@ -167,7 +167,7 @@ p {
 
 .container-img .box-img:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(72, 101, 71, 0.4);
+  box-shadow: 0 20px 40px rgba(183, 170, 146, 0.4);
 }
 
 .container-img .box-img:hover::before {
@@ -269,10 +269,10 @@ p {
 }
 
 .name-overlay {
-  font-family: 'Times New Roman', Times, serif;
+  font-family: 'Times New', Serief;
   font-size: 7rem;
   text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-  font-weight: normal;
+  font-weight: bold;
   line-height: 1.1;
   padding: 0 20px;
 }
@@ -332,7 +332,7 @@ p {
 }
 
 .panel-navegacion .activo {
-  background-color: #486547;
+  background-color: #a0885e;
 }
 
 .panel-navegacion .activo img {
@@ -340,11 +340,11 @@ p {
 }
 
 .panel-navegacion li:hover {
-  background-color: rgba(72, 101, 71, 0.2);
+  background-color: rgba(160, 136, 94, 0.2);
 }
 
 .panel-navegacion .activo:hover {
-  background-color: #3a5038;
+  background-color: #8c734d;
 }
 
 /* =========================================
@@ -354,7 +354,7 @@ p {
   font-family: 'Montserrat', sans-serif;
   color: #4a4a4a;
   padding: 60px 20px;
-  background: linear-gradient(to bottom, #fdf8d4 0%, #fdfdce 100%);
+  background: linear-gradient(to bottom, #f7f3ed 0%, #ffffff 100%);
 }
 
 .wedding-section .box {
@@ -370,7 +370,7 @@ p {
   margin-bottom: 20px;
   text-align: center;
   letter-spacing: 2px;
-  color: #486547;
+  color: #B7AA92;
   font-weight: 400;
 }
 
@@ -388,7 +388,7 @@ p {
   top: 50%;
   width: 40%;
   height: 1px;
-  background: linear-gradient(to right, transparent, #486547, transparent);
+  background: linear-gradient(to right, transparent, #B7AA92, transparent);
 }
 
 .wedding-section .divider::before { left: 0; }
@@ -397,7 +397,7 @@ p {
 .wedding-section .divider-icon {
   display: inline-block;
   font-size: 2rem;
-  color: #486547;
+  color: #D4AF37;
 }
 
 .wedding-section .details {
@@ -419,7 +419,7 @@ p {
 
 .wedding-section .details .box:hover {
   transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(72, 101, 71, 0.3);
+  box-shadow: 0 15px 40px rgba(183, 170, 146, 0.3);
 }
 
 .wedding-section .details .box img {
@@ -429,14 +429,11 @@ p {
   margin-bottom: 20px;
 }
 
-.wedding-section .details .box h2, 
-.dress-title {
-    font-family: 'Cormorant Garamond', serif !important;
-    color: #486547; /* Usamos el verde estándar del sitio */
-    letter-spacing: 2px;
-    font-size: 2rem;
-    margin-bottom: 15px;
-    text-transform: uppercase;
+.wedding-section .details .box h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  color: #B7AA92;
+  margin-bottom: 15px;
 }
 
 .wedding-section .date-celebration {
@@ -446,13 +443,13 @@ p {
 }
 
 .wedding-section .date-celebration > div:first-child {
-  border-right: 2px solid #486547;
+  border-right: 2px solid #B7AA92;
 }
 
 .wedding-section .date-celebration p {
   font-size: 1.8rem;
   font-weight: 600;
-  color: #486547;
+  color: #B7AA92;
 }
 
 .wedding-section .hour span {
@@ -464,10 +461,10 @@ p {
   max-width: 300px;
   font-size: 1rem;
   padding: 15px 30px;
-  border: 2px solid #486547;
+  border: 2px solid #B7AA92;
   border-radius: 25px;
   background: white;
-  color: #486547;
+  color: #B7AA92;
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 600;
@@ -475,25 +472,22 @@ p {
 }
 
 .wedding-section .ubication:hover {
-  background: linear-gradient(135deg, #486547, #486547);
+  background: linear-gradient(135deg, #B7AA92, #D4AF37);
   color: white;
-  border-color: #486547;
+  border-color: #D4AF37;
   transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(72, 101, 71, 0.4);
+  box-shadow: 0 5px 15px rgba(183, 170, 146, 0.4);
 }
 
 .wedding-section #itinerario {
   padding: 80px 20px;
-  background: linear-gradient(135deg, #c6ebff 0%, #cce0bc 100%);
-  border-radius: 30px;
-  margin: 40px auto;
-  max-width: 1200px;
+  background: white;
 }
 
 .wedding-section .header-itinerario h1 {
   font-family: 'Cormorant Garamond', serif;
   font-size: clamp(2.5rem, 5vw, 4rem);
-  color: #486547;
+  color: #B7AA92;
   margin-bottom: 5px;
   text-align: center;
 }
@@ -522,7 +516,7 @@ p {
   top: 0;
   width: 2px;
   height: 100%;
-  background: linear-gradient(to bottom, #486547, #486547);
+  background: linear-gradient(to bottom, #B7AA92, #D4AF37);
   transform: translateX(-50%);
 }
 
@@ -549,12 +543,12 @@ p {
 
 .wedding-section .detalle-evento:hover {
   transform: translateX(-10px);
-  box-shadow: 0 10px 25px rgba(72, 101, 71, 0.3);
+  box-shadow: 0 10px 25px rgba(183, 170, 146, 0.3);
 }
 
 .wedding-section .detalle-evento p:first-child {
   font-weight: 600;
-  color: #486547;
+  color: #B7AA92;
   font-size: 1.1rem;
   margin-bottom: 5px;
 }
@@ -567,20 +561,20 @@ p {
 .wedding-section .icono-evento {
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, #486547, #486547);
+  background: linear-gradient(135deg, #B7AA92, #D4AF37);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 10;
-  box-shadow: 0 5px 20px rgba(72, 101, 71, 0.4);
+  box-shadow: 0 5px 20px rgba(183, 170, 146, 0.4);
   position: relative;
   transition: all 0.3s ease;
 }
 
 .wedding-section .icono-evento:hover {
   transform: scale(1.1) rotate(10deg);
-  box-shadow: 0 8px 30px rgba(72, 101, 71, 0.6);
+  box-shadow: 0 8px 30px rgba(183, 170, 146, 0.6);
 }
 
 .wedding-section .icono-evento img {
@@ -596,7 +590,7 @@ p {
   justify-content: center;
   align-items: center;
   padding: 80px 1rem;
-  background: linear-gradient(135deg, #cce0bc 0%, #c6ebff 100%);
+  background: linear-gradient(135deg, #f7f3ed 0%, #ffffff 100%);
 }
 
 .invite-card {
@@ -604,18 +598,18 @@ p {
   max-width: 92vw;
   background: #fff;
   border-radius: 20px;
-  box-shadow: 0 20px 60px rgba(72, 101, 71, 0.2);
+  box-shadow: 0 20px 60px rgba(183, 170, 146, 0.2);
   padding: 50px 30px;
   text-align: center;
   font-family: 'Montserrat', sans-serif;
   color: #111;
-  border: 1px solid rgba(72, 101, 71, 0.2);
+  border: 1px solid rgba(183, 170, 146, 0.2);
   transition: all 0.3s ease;
 }
 
 .invite-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 25px 70px rgba(72, 101, 71, 0.3);
+  box-shadow: 0 25px 70px rgba(183, 170, 146, 0.3);
 }
 
 .invite-title {
@@ -623,7 +617,7 @@ p {
   font-size: 2.5rem;
   margin-bottom: 15px;
   line-height: 1.2;
-  color: #486547;
+  color: #B7AA92;
   font-weight: 400;
   letter-spacing: 1px;
 }
@@ -706,7 +700,7 @@ p {
 ========================================= */
 .regalos-section {
   font-family: 'Montserrat', sans-serif;
-  background: linear-gradient(135deg, #fdfdce 0%, #fdf8d4 100%);
+  background: linear-gradient(to bottom, #f7f3ed 0%, #ffffff 100%);
   padding: 80px 20px;
 }
 
@@ -721,7 +715,7 @@ p {
   margin-bottom: 20px;
   text-align: center;
   letter-spacing: 2px;
-  color: #486547;
+  color: #B7AA92;
   font-weight: 400;
 }
 
@@ -739,7 +733,7 @@ p {
   top: 50%;
   width: 40%;
   height: 1px;
-  background: linear-gradient(to right, transparent, #486547, transparent);
+  background: linear-gradient(to right, transparent, #B7AA92, transparent);
 }
 
 .regalos-section .divider::before { left: 0; }
@@ -748,7 +742,7 @@ p {
 .regalos-section .divider-icon {
   display: inline-block;
   font-size: 2rem;
-  color: #486547;
+  color: #D4AF37;
 }
 
 .regalos-mensaje {
@@ -782,13 +776,13 @@ p {
 
 .regalo-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(72, 101, 71, 0.3);
+  box-shadow: 0 15px 40px rgba(183, 170, 146, 0.3);
 }
 
 .regalo-icon {
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, #c6ebff 0%, #cce0bc 100%);
+  background: linear-gradient(135deg, #B7AA92 0%, #D4AF37 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -810,7 +804,7 @@ p {
 .regalo-card h3 {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.8rem;
-  color: #486547;
+  color: #B7AA92;
   margin-bottom: 10px;
 }
 
@@ -826,7 +820,7 @@ p {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: linear-gradient(135deg, #486547 0%, #3a5038 100%);
+  background: linear-gradient(135deg, #B7AA92 0%, #8c734d 100%);
   color: white;
   border: none;
   padding: 12px 30px;
@@ -835,14 +829,14 @@ p {
   cursor: pointer;
   transition: all 0.3s ease;
   font-family: 'Cairo', sans-serif;
-  box-shadow: 0 4px 15px rgba(72, 101, 71, 0.3);
+  box-shadow: 0 4px 15px rgba(183, 170, 146, 0.3);
   text-decoration: none;
 }
 
 .regalo-btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 6px 20px rgba(72, 101, 71, 0.5);
-  background: linear-gradient(135deg, #3a5038 0%, #486547 100%);
+  box-shadow: 0 6px 20px rgba(183, 170, 146, 0.5);
+  background: linear-gradient(135deg, #8c734d 0%, #B7AA92 100%);
 }
 
 .regalo-btn svg {
@@ -894,7 +888,7 @@ p {
   top: 15px;
   right: 15px;
   font-size: 30px;
-  color: #486547;
+  color: #B7AA92;
   background: none;
   border: none;
   cursor: pointer;
@@ -908,14 +902,14 @@ p {
 }
 
 .modal-close:hover {
-  background: rgba(72, 101, 71, 0.2);
+  background: rgba(183, 170, 146, 0.2);
   transform: rotate(90deg);
 }
 
 .modal-content h3 {
   font-family: 'Cormorant Garamond', serif;
   font-size: 2rem;
-  color: #486547;
+  color: #B7AA92;
   margin-bottom: 30px;
   text-align: center;
 }
@@ -932,15 +926,15 @@ p {
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  background: #fdf8d4;
+  background: #f7f3ed;
   border-radius: 10px;
-  border-left: 4px solid #486547;
+  border-left: 4px solid #B7AA92;
 }
 
 .info-label {
   font-family: 'Cairo', sans-serif;
   font-weight: 600;
-  color: #3a5038;
+  color: #8c734d;
   font-size: 0.95rem;
 }
 
@@ -954,7 +948,7 @@ p {
 .modal-note {
   font-family: 'Cairo', sans-serif;
   font-size: 0.85rem;
-  color: #3a5038;
+  color: #8c734d;
   text-align: center;
   margin-top: 20px;
   font-style: italic;
@@ -1078,7 +1072,7 @@ p {
   font-size: 40px;
   color: #fff;
   cursor: pointer;
-  background: rgba(72, 101, 71, 0.3);
+  background: rgba(183, 170, 146, 0.3);
   border: none;
   width: 50px;
   height: 50px;
@@ -1091,7 +1085,7 @@ p {
 
 .lightbox-close:hover {
   transform: scale(1.2);
-  background: rgba(72, 101, 71, 0.6);
+  background: rgba(183, 170, 146, 0.6);
 }
 
 .lightbox-nav {
@@ -1101,7 +1095,7 @@ p {
   font-size: 50px;
   color: #fff;
   cursor: pointer;
-  background: rgba(72, 101, 71, 0.3);
+  background: rgba(183, 170, 146, 0.3);
   border: none;
   width: 60px;
   height: 60px;
@@ -1114,7 +1108,7 @@ p {
 }
 
 .lightbox-nav:hover {
-  background: rgba(72, 101, 71, 0.6);
+  background: rgba(183, 170, 146, 0.6);
   transform: translateY(-50%) scale(1.1);
 }
 
@@ -1330,16 +1324,10 @@ p {
     padding: 30px 15px;
   }
   
-  /* Unificamos los textos descriptivos */
-.wedding-section .details .box p,
-.dress-type,
-.dress-note,
-.no-kids {
-    font-family: 'Cairo', sans-serif !important;
-    color: #4a4a4a;
-    line-height: 1.6;
-    margin: 5px 0;
-}
+  .wedding-section .details .box {
+    max-width: 100%;
+    padding: 30px 20px;
+  }
   
   .wedding-section .date-celebration {
     flex-direction: column;
@@ -1352,7 +1340,7 @@ p {
   
   .wedding-section .date-celebration > div:first-child {
     border-right: none;
-    border-bottom: 2px solid #486547;
+    border-bottom: 2px solid #B7AA92;
     padding-bottom: 10px;
   }
   
@@ -1485,69 +1473,3 @@ p {
   }
 }
 
-
-/* Contenedor específico */
-.dress-code-container {
-     padding: 10px 25px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  margin-bottom: 25px;
-}
-
-/* Ajuste para que el "Dress Code" no use el dorado si quieres total uniformidad */
-.dress-title {
-    color: #486547 !important; 
-}
-
-.dress-type {
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 1.8rem;
-    color: #486547;
-    margin: 10px 0;
-}
-
-.dress-note {
-    font-size: 0.8rem;
-    letter-spacing: 1px;
-    color: #666;
-    text-transform: uppercase;
-}
-
-/* Paleta de colores */
-.color-palette {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin: 20px 0;
-}
-
-.color-circle {
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    display: inline-block;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-
-
-/* Divisor elegante (opcional si no tienes imagen para el adorno) */
-.divider-elegant {
-    width: 150px;
-    height: 1px;
-    background: #b5a46d;
-    margin: 30px auto;
-    position: relative;
-}
-
-.divider-elegant::after {
-    content: '❦';
-    position: absolute;
-    top: -12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #fdf8d4; /* Color de fondo de tu body */
-    padding: 0 10px;
-    color: #b5a46d;
-}
