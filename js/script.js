@@ -231,20 +231,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Generar QR code
             const qrcodeDiv = document.getElementById("qrcode");
+            const qrSize = Math.min(Math.max(Math.floor(window.innerWidth * 0.28), 200), 290);
             
             if (inv.asistencia === true) {
                 // QR real con UUID
                 new QRCode(qrcodeDiv, {
                     text: uuid,
-                    width: 200,
-                    height: 200
+                    width: qrSize,
+                    height: qrSize
                 });
             } else {
                 // QR estático con signo de interrogación
                 new QRCode(qrcodeDiv, {
                     text: "PENDIENTE",
-                    width: 200,
-                    height: 200,
+                    width: qrSize,
+                    height: qrSize,
                     colorDark: "#cccccc",
                     colorLight: "#ffffff"
                 });

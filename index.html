@@ -6,7 +6,22 @@
     <title>Página de Boda</title>
     <link href="https://fonts.cdnfonts.com/css/miama" rel="stylesheet">
     <link rel="stylesheet" href="./css/index.css">
-</head>
+    <meta name="description" content="Acompáñanos a celebrar nuestra boda. Karen & Erick. 25 de Abril.">
+<meta name="author" content="Karen & Erick">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://vellumdigitall.online/">
+<meta property="og:title" content="Boda de Karen & Erick">
+<meta property="og:description" content="Estás invitado a compartir con nosotros este gran día. ¡Consulta los detalles aquí!">
+<meta property="og:image" content="https://vellumdigitall.online/img/invitacion_6.webp">
+
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content="https://karen-y-erick.vellumdigitall.online/">
+<meta property="twitter:title" content="Boda de Karen & Erick">
+<meta property="twitter:description" content="Acompáñanos a celebrar nuestra unión este 25 de abril.">
+<meta property="twitter:image" content="https://karen-y-erick.vellumdigitall.online/img/invitacion_6webp">
+
+<link rel="icon" type="image/webp" href="./img/unnamed.webp"></head>
 
 <body>
 <audio id="bg-music" loop>
@@ -58,7 +73,7 @@
         <!-- Invitación -->
         <div class="box">
             <h2 class="mainText">¡Estás Invitado!</h2>
-            <p style="max-width: 600px; font-size: 1.1rem; line-height: 1.8;">Queremos que seas parte de este momento tan especial en nuestras vidas</p>
+            <p class = "principal-font ">Queremos que seas parte de este momento tan especial en nuestras vidas</p>
             <div class="divider">
                 <span class="divider-icon">♦</span>
             </div>
@@ -73,10 +88,10 @@
                 <p>Te esperamos el</p>
                 <div class="date-celebration">
                     <div>
-                        <p>25 ABRIL</p>
+                        <p>SABADO 25 ABRIL</p>
                     </div>
                     <div>
-                        <p class="hour">04:00 <span>P.M</span></p>
+                        <p class="hour">3:50 <span>P.M</span></p>
                     </div>
                 </div>
                 <p>Av Roma s/n, Andrade, 37020</p>
@@ -99,10 +114,12 @@
     <p> Favor de vestir preferentemente a la paleta de colores </p>
     
     <div class="color-palette">
-        <span class="color-circle" style="background-color: #e4af2e; border: 1px solid #d4c59a;"></span>
+        <span class="color-circle" style="background-color: #fcd166; border: 1px solid #d4c59a;"></span>
         <span class="color-circle" style="background-color: #c6ebfe;"></span>
-        <span class="color-circle" style="background-color: #588157;"></span>
+        <span class="color-circle" style="background-color: #d65dae;"></span>
         <span class="color-circle" style="background-color: #3a0ca3;"></span>
+          <span class="color-circle" style="background-color: #588157;"></span>
+        
     </div>
 
     <div class="divider-elegant">
@@ -218,6 +235,30 @@
     <!-- ASISTENCIA (SOLO LECTURA POR UUID) -->
     <section id="asistencia" class="box">
         <!-- JS inyecta aquí la tarjeta del invitado -->
+    </section>
+
+    <!-- Sección Fotos -->
+    <section id="fotos" class="fotos-section">
+        <div class="fotos-container">
+            <div class="fotos-icon">
+                <img src="./img/camera.png" alt="Cámara">
+            </div>
+            <h2 class="mainText">Álbum de la Boda</h2>
+            <div class="divider">
+            </div>
+            <p class="fotos-mensaje">¡Captura y comparte los momentos especiales de este día! Cada foto tuya es un recuerdo que atesoraremos para siempre</p>
+            <div class="fotos-botones">
+                <a hr
+                <a href="https://photos.app.goo.gl/nMcsDTWHfKahD3Jo9" target="_blank" class="fotos-btn fotos-btn-subir">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/>
+                        <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
+                    </svg>
+                    Subir mis fotos
+                </a>
+            </div>
+            <p class="fotos-nota">Se abrirá Google Fotos donde podrás ver y agregar tus fotos al álbum compartido</p>
+        </div>
     </section>
 
     <!-- Sección Regalos -->
