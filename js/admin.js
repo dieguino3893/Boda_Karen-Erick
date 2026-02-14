@@ -21,16 +21,20 @@ function renderizarTabla(datos) {
         const tr = document.createElement("tr");
         tr.innerHTML = `
             <td>${index + 1}</td>
-            <td>${inv.nombre}</td>
+            <td>
+                <input type="text" id="nombre-${inv.id}" class="form-control form-control-sm" value="${inv.nombre}" placeholder="Nombre">
+            </td>
             <td>${inv.asistencia === null ? "No confirmado" : inv.asistencia ? "Sí" : "No"} </td>
-            <td>${inv.invitados}</td>
+            <td>
+                <input type="number" id="acompanantes-${inv.id}" class="form-control form-control-sm" value="${inv.invitados}" placeholder="Acompañantes">
+            </td>
             <td>
                 <input type="text" id="mesa-${inv.id}" class="form-control form-control-sm" value="${inv.mesa || ''}" placeholder="Mesa">
             </td>
-            <td>${inv.fecha_registro ? new Date(inv.fecha_registro).toLocaleString() : ''}</td>
+
             <td>
                 <div class="btn-group" role="group">
-                  <button class="btn btn-success btn-sm" onclick="asignarMesa('${inv.id}')">Asignar</button>
+                  <button class="btn btn-success btn-sm" onclick="Actualizar('${inv.id}')">Actualizar</button>
                   <button class="btn btn-secondary btn-sm" onclick="copiarEnlace('${inv.uuid}')">Copiar</button>
                   <button class="btn btn-danger btn-sm" onclick="eliminarInvitado('${inv.id}')">Eliminar</button>
                 </div>
@@ -65,20 +69,34 @@ function aplicarFiltros() {
     renderizarTabla(invitadosFiltrados);
 }
 
-        async function asignarMesa(id) {
+        async function Actualizar(id) {
             const mesa = document.getElementById(`mesa-${id}`).value;
-            if (!mesa) return;
-            await fetch(ruta + `/${id}/mesa`, {
+            const nombre = document.getElementById(`nombre-${id}`).value;
+            const acompañantes = document.getElementById(`acompanantes-${id}`).value;
+
+            if (!mesa || !nombre) return;
+
+            await fetch(ruta + `/${id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ Mesa: Number(mesa) })
+                body: JSON.stringify({
+                    Nombre: nombre,
+                    Mesa: Number(mesa),
+                    Invitados: Number(acompañantes)
+                })
             });
 
-            // Mostrar alerta tipo toast
+            // Toast
             if (!toast) {
-                toast = new bootstrap.Toast(document.getElementById('alert-toast'), { delay: 2000 });
+                toast = new bootstrap.Toast(
+                    document.getElementById('alert-toast'),
+                    { delay: 2000 }
+                );
             }
-            document.getElementById('toast-body').textContent = `Mesa "${mesa}" asignada a invitado ${id}!`;
+
+            document.getElementById('toast-body').textContent =
+                `Invitado "${nombre}" actualizado. Mesa ${mesa}.`;
+
             toast.show();
 
             cargarInvitados();
