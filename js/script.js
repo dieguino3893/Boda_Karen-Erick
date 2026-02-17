@@ -231,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Generar QR code
             const qrcodeDiv = document.getElementById("qrcode");
-            const qrSize = Math.min(Math.max(Math.floor(window.innerWidth * 0.28), 200), 290);
+            const qrSize = Math.min(Math.max(Math.floor(window.innerWidth * 0.32), 240), 320);
             
             if (inv.asistencia === true) {
                 // QR real con UUID
