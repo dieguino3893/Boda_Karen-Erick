@@ -182,53 +182,35 @@ document.addEventListener("DOMContentLoaded", () => {
                 `;
                 return;
             }
-            
             // Si ya confirmó que SÍ asistirá o está pendiente
-            section.innerHTML = `
-                <div class="invite-wrapper">
-                    <div class="invite-card">
-                        <div class="invite-title">Tu Invitación</div>
-                        <div class="invite-sub">PRESENTA ESTE CÓDIGO</div>
-                        <div class="qr-box">
-                            <div id="qrcode" style="position: relative;"></div>
-                        </div>
-                        <div class="guest-name">${inv.nombre}</div>
-                        <div class="guest-info">
-                          Confirmación: ${inv.asistencia === true ? "✓ Confirmado" : "Pendiente"}<br>
-                          Acompañantes: ${inv.invitados} ${inv.invitados === 1 ? 'persona' : 'personas'}
-                        </div>
-                        ${inv.asistencia !== true ? `
-                        <div style="margin-top: 20px;">
-                            <button id="btnConfirmar" style="
-                                background: #86674a;
-                                color: white;
-                                border: none;
-                                padding: 12px 30px;
-                                font-size: 16px;
-                                border-radius: 8px;
-                                box-shadow: 0 0 5px #e6dfd8;
-                                cursor: pointer;
-                                transition: background 0.3s;
-                                margin-right: 10px;
-                            ">Asistiré</button>
-                            <button id="btnDeclinar" style="
-                                background: #ffffff;
-                                color: #86674a;
-                                border: none;
-                                padding: 12px 30px;
-                                font-size: 16px;
-                                border-radius: 8px;
-                                box-shadow: 0 0 5px #e6dfd8;
-                                cursor: pointer;
-                                transition: background 0.3s;
-                            ">No Asistiré</button>
-                            <div id="mensajeConfirmacion" style="margin-top: 10px;"></div>
-                        </div>
-                        ` : ''}
+section.innerHTML = `
+    <div class="invite-wrapper">
+        <div class="invite-card">
+            <div class="invite-title">Tu Invitación</div>
+            <div class="invite-sub">PRESENTA ESTE CÓDIGO</div>
+            <div class="qr-box">
+                <div id="qrcode" style="position: relative;"></div>
+            </div>
+            <div class="guest-name">${inv.nombre}</div>
+            <div class="guest-info">
+                Confirmación: ${inv.asistencia === true ? "✓ Confirmado" : "Pendiente"}<br>
+                Acompañantes: ${inv.invitados} ${inv.invitados === 1 ? 'persona' : 'personas'}
+            </div>
+
+            ${inv.asistencia !== true ? `
+                <!-- Mensaje de periodo finalizado -->
+                <div style="margin-top: 20px; padding: 15px; background: #f9f7f4; border: 1px solid #e6dfd8; border-radius: 8px;">
+                    <div style="color: #86674a; font-weight: bold; font-size: 15px; margin-bottom: 5px;">
+                        El periodo de confirmación ha finalizado
+                    </div>
+                    <div style="color: #666; font-size: 13px; line-height: 1.4;">
+                        Si necesitas realizar algún cambio en tu asistencia, por favor contáctanos directamente.
                     </div>
                 </div>
-            `;
-
+            ` : ''}
+        </div>
+    </div>
+`;
             // Generar QR code
             const qrcodeDiv = document.getElementById("qrcode");
             const qrSize = Math.min(Math.max(Math.floor(window.innerWidth * 0.32), 240), 320);
@@ -274,7 +256,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     qrcodeDiv.appendChild(questionMark);
                 }, 100);
             }
-
+/* 
             // Agregar eventos de confirmación DESPUÉS de insertar el HTML
             if (inv.asistencia !== true && inv.asistencia !== false) {
                 // Esperar un momento para que el DOM se actualice
@@ -338,6 +320,18 @@ document.addEventListener("DOMContentLoaded", () => {
                     <div class="invite-card">
                         <div style="color: #f44336; text-align: center;">
                             Error al cargar la invitación
+                        </div>
+                    </div>
+                </div>
+            `;
+        }); */
+        })
+        .catch(() => {
+            document.getElementById("asistencia").innerHTML = `
+                <div class="invite-wrapper">
+                    <div class="invite-card">
+                        <div style="color: #f44336; text-align: center;">
+                            Error al cargar la invitación. Por favor intenta más tarde.
                         </div>
                     </div>
                 </div>
