@@ -195,6 +195,8 @@ section.innerHTML = `
             <div class="guest-info">
                 Confirmación: ${inv.asistencia === true ? "✓ Confirmado" : "Pendiente"}<br>
                 Acompañantes: ${inv.invitados} ${inv.invitados === 1 ? 'persona' : 'personas'}
+                 <br>
+                Mesa: ${inv.mesa || "No asignada"}
             </div>
 
             ${inv.asistencia !== true ? `

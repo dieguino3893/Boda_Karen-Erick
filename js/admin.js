@@ -158,39 +158,50 @@ function aplicarFiltros() {
             // Recargar tabla
             cargarInvitados();
         }
+
 function onScanSuccess(decodedText) {
-    // decodedText es el contenido del QR
     console.log(`QR Escaneado: ${decodedText}`);
     const resultDiv = document.getElementById("qr-result");
 
-   // Consultar backend con el UUID escaneado
-fetch(ruta  + `/qr/${encodeURIComponent(decodedText)}`)
-    .then(res => {
-        if (!res.ok) {
-            throw new Error("Invitado no encontrado");
-        }
-        return res.json();
+    // 🔥 PREGUNTAR CUÁNTOS VIENEN
+    const cantidad = prompt("¿Cuántas personas entran con este QR?");
+
+    if (!cantidad || isNaN(cantidad) || Number(cantidad) <= 0) {
+        resultDiv.innerHTML = `<div class="alert alert-warning">Cantidad inválida</div>`;
+        return;
+    }
+
+    fetch(`${ruta}/qr?uuid=${encodeURIComponent(decodedText)}&cantidad=${cantidad}`, {
+        method: "POST"
     })
-    .then(invitado => {
-        if (!invitado) {
-            resultDiv.innerHTML = `<div class="alert alert-warning">Invitado no encontrado</div>`;
-            return;
+    .then(res => res.json())
+    .then(data => {
+        if (data.modo === "consulta") {
+            resultDiv.innerHTML = `
+                <div class="alert alert-info">
+                    <strong>${data.nombre}</strong><br>
+                    Invitados: ${data.invitados}<br>
+                    Restantes: ${data.restantes}
+                </div>
+            `;
+        } else {
+            // 🔥 CONSUMO
+            resultDiv.innerHTML = `
+                <div class="alert ${data.restantes >= 0 ? 'alert-success' : 'alert-danger'}">
+                    <strong>${data.nombre}</strong><br>
+                    ${data.message}<br>
+                    Restantes: ${data.restantes}
+                </div>
+            `;
         }
 
-        resultDiv.innerHTML = `
-            <div class="alert alert-info">
-                <strong>Nombre:</strong> ${invitado.nombre} <br>
-                <strong>Asistencia:</strong> ${invitado.asistencia ? "Sí" : "No"} <br>
-                <strong>Acompañantes:</strong> ${invitado.invitados} <br>
-                <strong>Mesa:</strong> ${invitado.mesa || 'Sin asignar'} <br>
-                <strong>ID:</strong> ${invitado.id} <br>
-                <strong>Fecha de registro:</strong> ${new Date(invitado.fecha_registro).toLocaleString()}
-            </div>
-        `;
+        // 🔥 DETENER ESCÁNER PARA EVITAR DOBLE LECTURA
+        html5QrCode.stop();
     })
     .catch(err => {
         console.error(err);
-        resultDiv.innerHTML = `<div class="alert alert-danger">Error al buscar invitado</div>`;
+        resultDiv.innerHTML = `<div class="alert alert-danger">Error al procesar QR</div>`;
+        html5QrCode.stop();
     });
 }
 
