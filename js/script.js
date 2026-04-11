@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
     /* ---------- PING BACKEND ---------- */
-    fetch("https://netasistencia-bbckcda7hbhpdtgd.eastus-01.azurewebsites.net/asistencia/wakeup")
+    fetch("https://vellum-services.runasp.net/asistencia/wakeup")
         .then(res => res.json())
         .then(data => console.log(data.message || "Ping al servidor completado."))
         .catch(() => {});
@@ -156,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const uuid = new URLSearchParams(location.search).get("datos");
     if (!uuid) return;
 
-    fetch(`https://netasistencia-bbckcda7hbhpdtgd.eastus-01.azurewebsites.net/asistencia/qr/${uuid}`)
+    fetch(`https://vellum-services.runasp.net/asistencia/qr/${uuid}`)
         .then(res => res.ok ? res.json() : Promise.reject())
         .then(inv => {
             const section = document.getElementById("asistencia");
@@ -274,7 +274,7 @@ section.innerHTML = `
                         mensajeConfirmacion.textContent = "Procesando...";
                         mensajeConfirmacion.style.color = "#666";
 
-                        fetch("https://netasistencia-bbckcda7hbhpdtgd.eastus-01.azurewebsites.net/asistencia/actualizar", {
+                        fetch("https://vellum-services.runasp.net/asistencia/actualizar", {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json"

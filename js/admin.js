@@ -1,5 +1,5 @@
 // ─── CONFIG ───────────────────────────────────────────────
-const ruta = "https://netasistencia-bbckcda7hbhpdtgd.eastus-01.azurewebsites.net/asistencia";
+const ruta = "https://vellum-services.runasp.net/asistencia";
 let listaInvitados = [];
 let toastInstance;
 
