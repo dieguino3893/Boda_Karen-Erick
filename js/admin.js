@@ -615,7 +615,7 @@ function mostrarResultadoSwal(data, cantidad) {
         `,
         confirmButtonText: 'OK',
         confirmButtonColor: '#c9a84c',
-        timer: 3000,
+        timer: 1500,
         timerProgressBar: true,
     });
 }
